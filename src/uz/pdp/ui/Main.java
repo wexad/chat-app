@@ -1,4 +1,4 @@
-package uz.pdp;
+package uz.pdp.ui;
 
 public class Main {
 }
