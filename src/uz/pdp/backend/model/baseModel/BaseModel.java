@@ -2,7 +2,7 @@ package uz.pdp.backend.model.baseModel;
 
 import java.util.UUID;
 
-public class BaseModel {
+public abstract class BaseModel {
     private final String id;
 
     public BaseModel() {
