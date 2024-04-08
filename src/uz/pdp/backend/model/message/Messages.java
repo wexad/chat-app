@@ -4,16 +4,17 @@ import uz.pdp.backend.enums.MessageType;
 import uz.pdp.backend.model.baseModel.BaseModel;
 
 import java.sql.Time;
+import java.time.LocalTime;
 
 public class Messages extends BaseModel implements Comparable{
     private String text;
     private final MessageType type;
     private final String userId;
     private final String toId;
-    private final Time time;
+    private final LocalTime time;
     private boolean isRead;
 
-    public Messages(String text, MessageType type, String userId, String toId, Time time, boolean isRead) {
+    public Messages(String text, MessageType type, String userId, String toId, LocalTime time, boolean isRead) {
         this.text = text;
         this.type = type;
         this.userId = userId;
@@ -38,7 +39,7 @@ public class Messages extends BaseModel implements Comparable{
         return toId;
     }
 
-    public Time getTime() {
+    public LocalTime getTime() {
         return time;
     }
 

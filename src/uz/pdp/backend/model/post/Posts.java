@@ -3,15 +3,16 @@ package uz.pdp.backend.model.post;
 import uz.pdp.backend.model.baseModel.BaseModel;
 
 import java.sql.Time;
+import java.time.LocalTime;
 
 public class Posts extends BaseModel implements Comparable {
     private String text;
     private final String userId;
     private final String channelId;
     private Integer countOfViews;
-    private final Time time;
+    private final LocalTime time;
 
-    public Posts(String text, String userId, String channelId, Integer countOfViews, Time time) {
+    public Posts(String text, String userId, String channelId, Integer countOfViews, LocalTime time) {
         this.text = text;
         this.userId = userId;
         this.channelId = channelId;
@@ -35,7 +36,7 @@ public class Posts extends BaseModel implements Comparable {
         return countOfViews;
     }
 
-    public Time getTime() {
+    public LocalTime getTime() {
         return time;
     }
 

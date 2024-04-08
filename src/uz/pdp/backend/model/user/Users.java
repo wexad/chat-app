@@ -3,15 +3,16 @@ package uz.pdp.backend.model.user;
 import uz.pdp.backend.model.baseModel.BaseModel;
 
 import java.sql.Time;
+import java.time.LocalTime;
 
 public class Users extends BaseModel {
     private String name;
     private Integer number;
     private String nickname;
     private String password;
-    private Time lastActivity;
+    private LocalTime lastActivity;
 
-    public Users(String name, Integer number, String nickname, String password, Time lastActivity) {
+    public Users(String name, Integer number, String nickname, String password, LocalTime lastActivity) {
         this.name = name;
         this.number = number;
         this.nickname = nickname;
@@ -51,11 +52,11 @@ public class Users extends BaseModel {
         this.password = password;
     }
 
-    public Time getLastActivity() {
+    public LocalTime getLastActivity() {
         return lastActivity;
     }
 
-    public void setLastActivity(Time lastActivity) {
+    public void setLastActivity(LocalTime lastActivity) {
         this.lastActivity = lastActivity;
     }
 }

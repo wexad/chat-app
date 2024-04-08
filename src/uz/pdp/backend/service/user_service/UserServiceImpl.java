@@ -2,6 +2,8 @@ package uz.pdp.backend.service.user_service;
 
 import uz.pdp.backend.model.user.Users;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +70,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users getAndAdd(String name, Integer number, String nickname, String password) {
-        return null;
+        Users user = new Users(name, number, nickname, password, LocalTime.now());
+        users.add(user);
+        return user;
     }
 }
