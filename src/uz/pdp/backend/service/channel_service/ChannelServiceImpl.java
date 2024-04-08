@@ -29,7 +29,7 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Channels channels) {
         return false;
     }
 

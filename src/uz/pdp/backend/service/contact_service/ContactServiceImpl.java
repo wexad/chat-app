@@ -29,7 +29,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Contacts contacts) {
         return false;
     }
 

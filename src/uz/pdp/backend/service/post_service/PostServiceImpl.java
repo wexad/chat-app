@@ -29,7 +29,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Posts posts) {
         return false;
     }
 

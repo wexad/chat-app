@@ -28,7 +28,7 @@ public class ChannelUserServiceImpl implements ChannelUserService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(ChannelUsers channelUsers) {
         return false;
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 public interface BaseService<E extends BaseModel>{
     boolean add(E o);
 
-    boolean delete(String id);
+    boolean delete(E e);
 
     E get(String id);
 

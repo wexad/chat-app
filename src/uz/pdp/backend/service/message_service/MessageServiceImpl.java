@@ -29,7 +29,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Messages messages) {
         return false;
     }
 

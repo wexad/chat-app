@@ -29,7 +29,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Groups groups) {
         return false;
     }
 

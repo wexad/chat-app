@@ -29,9 +29,11 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Chats chats) {
         return false;
     }
+
+
 
     @Override
     public Chats get(String id) {

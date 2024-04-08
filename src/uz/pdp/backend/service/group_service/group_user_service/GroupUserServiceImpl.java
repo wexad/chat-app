@@ -29,7 +29,7 @@ public class GroupUserServiceImpl implements GroupUserService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(GroupUsers groupUsers) {
         return false;
     }
 
