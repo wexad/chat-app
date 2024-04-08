@@ -1,8 +1,11 @@
 package uz.pdp.ui.views;
 
+import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.user_service.UserService;
 import uz.pdp.backend.service.user_service.UserServiceImpl;
+import uz.pdp.ui.Main;
 import uz.pdp.ui.utils.Input;
+import uz.pdp.ui.utils.Message;
 
 public class LoginView {
 
@@ -27,9 +30,24 @@ public class LoginView {
         String name = Input.inputStr("Name : ");
         Integer number = Input.inputInt("Number : ");
         String nickname = Input.inputStr("Nickname : ");
+
+        while (userService.checkUnique(number, nickname)) {
+            Message.failure();
+            System.out.println("It is not unique number or nickname! Try ? 1 yes / 0 no");
+
+            if (Input.inputStr("Choice : ").equals("1")) {
+                number = Input.inputInt("Number : ");
+                nickname = Input.inputStr("Nickname : ");
+            } else {
+                return;
+            }
+        }
+
         String password = Input.inputStr("Password : ");
 
-        boolean b = userService.checkUnique(number, nickname);
+        Main.curUser = userService.getAndAdd(name, number, nickname, password);
+
+        System.out.println(Main.curUser);
     }
 
     private static void loginUser() {

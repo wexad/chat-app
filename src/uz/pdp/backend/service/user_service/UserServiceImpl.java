@@ -65,4 +65,9 @@ public class UserServiceImpl implements UserService {
         }
         return true;
     }
+
+    @Override
+    public Users getAndAdd(String name, Integer number, String nickname, String password) {
+        return null;
+    }
 }
