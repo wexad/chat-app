@@ -2,5 +2,14 @@ package uz.pdp.backend.service.base_service;
 
 import uz.pdp.backend.model.baseModel.BaseModel;
 
-public interface BaseService<T extends BaseModel>{
+import java.util.List;
+
+public interface BaseService<E extends BaseModel>{
+    boolean add(E o);
+
+    boolean delete(String id);
+
+    E get(String id);
+
+    List<E> getList();
 }

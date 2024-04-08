@@ -23,4 +23,23 @@ public class GroupUserServiceImpl implements GroupUserService {
         return groupUserService;
     }
 
+    @Override
+    public boolean add(GroupUsers o) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) {
+        return false;
+    }
+
+    @Override
+    public GroupUsers get(String id) {
+        return null;
+    }
+
+    @Override
+    public List<GroupUsers> getList() {
+        return null;
+    }
 }

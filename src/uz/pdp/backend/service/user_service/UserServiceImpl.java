@@ -23,4 +23,24 @@ public class UserServiceImpl implements UserService {
 
         return userService;
     }
+
+    @Override
+    public boolean add(Users o) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) {
+        return false;
+    }
+
+    @Override
+    public Users get(String id) {
+        return null;
+    }
+
+    @Override
+    public List<Users> getList() {
+        return null;
+    }
 }

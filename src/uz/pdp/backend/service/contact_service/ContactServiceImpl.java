@@ -22,4 +22,24 @@ public class ContactServiceImpl implements ContactService {
 
         return contactService;
     }
+
+    @Override
+    public boolean add(Contacts o) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) {
+        return false;
+    }
+
+    @Override
+    public Contacts get(String id) {
+        return null;
+    }
+
+    @Override
+    public List<Contacts> getList() {
+        return null;
+    }
 }

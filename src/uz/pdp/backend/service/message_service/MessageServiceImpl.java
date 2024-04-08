@@ -22,4 +22,24 @@ public class MessageServiceImpl implements MessageService {
 
         return messageService;
     }
+
+    @Override
+    public boolean add(Messages o) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) {
+        return false;
+    }
+
+    @Override
+    public Messages get(String id) {
+        return null;
+    }
+
+    @Override
+    public List<Messages> getList() {
+        return null;
+    }
 }

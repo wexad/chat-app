@@ -22,4 +22,24 @@ public class ChannelServiceImpl implements ChannelService {
 
         return channelService;
     }
+
+    @Override
+    public boolean add(Channels o) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) {
+        return false;
+    }
+
+    @Override
+    public Channels get(String id) {
+        return null;
+    }
+
+    @Override
+    public List<Channels> getList() {
+        return null;
+    }
 }

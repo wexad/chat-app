@@ -23,4 +23,23 @@ public class ChatServiceImpl implements ChatService {
         return chatService;
     }
 
+    @Override
+    public boolean add(Chats o) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) {
+        return false;
+    }
+
+    @Override
+    public Chats get(String id) {
+        return null;
+    }
+
+    @Override
+    public List<Chats> getList() {
+        return null;
+    }
 }

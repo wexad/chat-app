@@ -21,4 +21,24 @@ public class ChannelUserServiceImpl implements ChannelUserService {
 
         return channelUserService;
     }
+
+    @Override
+    public boolean add(ChannelUsers o) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) {
+        return false;
+    }
+
+    @Override
+    public ChannelUsers get(String id) {
+        return null;
+    }
+
+    @Override
+    public List<ChannelUsers> getList() {
+        return null;
+    }
 }

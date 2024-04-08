@@ -23,4 +23,23 @@ public class GroupServiceImpl implements GroupService {
         return groupService;
     }
 
+    @Override
+    public boolean add(Groups o) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) {
+        return false;
+    }
+
+    @Override
+    public Groups get(String id) {
+        return null;
+    }
+
+    @Override
+    public List<Groups> getList() {
+        return null;
+    }
 }

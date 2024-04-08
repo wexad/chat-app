@@ -22,4 +22,24 @@ public class PostServiceImpl implements PostService {
 
         return postService;
     }
+
+    @Override
+    public boolean add(Posts o) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) {
+        return false;
+    }
+
+    @Override
+    public Posts get(String id) {
+        return null;
+    }
+
+    @Override
+    public List<Posts> getList() {
+        return null;
+    }
 }
