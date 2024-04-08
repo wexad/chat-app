@@ -55,4 +55,9 @@ public class UserServiceImpl implements UserService {
     public List<Users> getList() {
         return users;
     }
+
+    @Override
+    public boolean checkUnique(Integer number, String password) {
+        return false;
+    }
 }

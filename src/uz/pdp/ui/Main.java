@@ -1,5 +1,6 @@
 package uz.pdp.ui;
 
+import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.channel_service.ChannelService;
 import uz.pdp.backend.service.channel_service.ChannelServiceImpl;
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserService;
@@ -18,6 +19,8 @@ import uz.pdp.backend.service.post_service.PostService;
 import uz.pdp.backend.service.post_service.PostServiceImpl;
 import uz.pdp.backend.service.user_service.UserService;
 import uz.pdp.backend.service.user_service.UserServiceImpl;
+import uz.pdp.ui.views.LoginView;
+import uz.pdp.ui.views.MainView;
 
 public class Main {
 
@@ -31,7 +34,15 @@ public class Main {
     static ChannelUserService channelUserService = ChannelUserServiceImpl.getInstance();
     static PostService postService = PostServiceImpl.getInstance();
 
-    public static void main(String[] args) {
+    public static Users curUser;
 
+    public static void main(String[] args) {
+        System.out.println("Welcome! To our new chat application! ");
+        while (true) {
+            if (curUser == null) {
+                LoginView.start();
+                continue;
+            }
+        }
     }
 }
