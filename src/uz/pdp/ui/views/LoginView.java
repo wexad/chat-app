@@ -18,7 +18,6 @@ public class LoginView {
                 case 1 -> loginUser();
                 case 2 -> registerUser();
 
-
             }
         }
     }
@@ -46,7 +45,7 @@ public class LoginView {
 
         Main.curUser = userService.getAndAdd(name, number, nickname, password);
 
-        System.out.println(Main.curUser);
+        System.out.println("Welcome! " + Main.curUser);
     }
 
     private static void loginUser() {
