@@ -57,7 +57,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean checkUnique(Integer number, String password) {
-        return false;
+    public boolean checkUnique(Integer number, String nickname) {
+        for (Users user : users) {
+            if (user.getNickname().equals(nickname) || user.getNumber().equals(number)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

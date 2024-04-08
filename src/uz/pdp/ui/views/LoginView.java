@@ -29,7 +29,7 @@ public class LoginView {
         String nickname = Input.inputStr("Nickname : ");
         String password = Input.inputStr("Password : ");
 
-        boolean b = userService.checkUnique(number, password);
+        boolean b = userService.checkUnique(number, nickname);
     }
 
     private static void loginUser() {
