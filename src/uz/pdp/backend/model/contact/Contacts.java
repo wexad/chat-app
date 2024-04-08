@@ -2,7 +2,7 @@ package uz.pdp.backend.model.contact;
 
 import uz.pdp.backend.model.baseModel.BaseModel;
 
-public class Contacts extends BaseModel {
+public class Contacts extends BaseModel implements Comparable {
     private final String userId;
     private String id;
     private String name;
@@ -32,5 +32,10 @@ public class Contacts extends BaseModel {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.name.compareTo(((Contacts) o).name);
     }
 }
