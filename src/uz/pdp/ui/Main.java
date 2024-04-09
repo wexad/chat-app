@@ -22,6 +22,7 @@ import uz.pdp.backend.service.user_service.UserServiceImpl;
 import uz.pdp.ui.utils.Input;
 import uz.pdp.ui.utils.Message;
 import uz.pdp.ui.views.LoginView;
+import uz.pdp.ui.views.MainView;
 
 import static uz.pdp.ui.views.LoginView.loginUser;
 import static uz.pdp.ui.views.LoginView.registerUser;
@@ -51,6 +52,8 @@ public class Main {
                 case 0 -> Message.goodbye();
                 default -> Message.failure();
             }
+
+            MainView.start();
         } while ( choice != 0);
     }
 }

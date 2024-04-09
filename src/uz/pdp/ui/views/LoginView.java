@@ -8,6 +8,7 @@ import uz.pdp.ui.Main;
 import uz.pdp.ui.utils.Input;
 import uz.pdp.ui.utils.Message;
 
+import java.time.LocalTime;
 import java.util.Optional;
 
 public class LoginView {
@@ -71,5 +72,10 @@ public class LoginView {
                                 
                 0. Exit
                 """);
+    }
+
+    public static void logOut() {
+        Main.curUser.setLastActivity(LocalTime.now());
+        Main.curUser = null;
     }
 }
