@@ -12,6 +12,8 @@ public interface UserService extends BaseService<Users> {
     Users getAndAdd(String name, String number, String nickname, String password);
 
     Optional<Users> findUser(LoginDTO loginDTO);
+
+    String getUserByNumber(String number);
 }
 
 

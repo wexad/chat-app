@@ -3,6 +3,7 @@ package uz.pdp.backend.model.contact;
 import uz.pdp.backend.model.baseModel.BaseModel;
 
 public class Contacts extends BaseModel implements Comparable {
+
     private final String userId;
     private String id;
     private String name;

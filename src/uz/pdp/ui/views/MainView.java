@@ -11,7 +11,7 @@ public class MainView {
             choice = Input.inputInt("Choice : ");
 
             switch (choice) {
-                case 1 -> ContactView.start();
+                case 1 -> ContactView.addContact();
                 case 2 -> ChatsView.start();
                 case 3 -> GroupsView.start();
                 case 4 -> ChannelsView.start();

@@ -46,4 +46,9 @@ public class ContactServiceImpl implements ContactService {
     public List<Contacts> getList() {
         return contacts;
     }
+
+    @Override
+    public boolean isExist(String id, String contactId) {
+        return false;
+    }
 }
