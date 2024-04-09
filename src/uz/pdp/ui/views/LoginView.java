@@ -1,24 +1,26 @@
 package uz.pdp.ui.views;
 
+import uz.pdp.backend.dto.LoginDTO;
+import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.user_service.UserService;
 import uz.pdp.backend.service.user_service.UserServiceImpl;
 import uz.pdp.ui.Main;
 import uz.pdp.ui.utils.Input;
 import uz.pdp.ui.utils.Message;
 
+import java.util.Optional;
+
 public class LoginView {
 
     static UserService userService = UserServiceImpl.getInstance();
 
     public static void start() {
-        while (true) {
-            displayMenu();
+        displayMenu();
 
-            switch (Input.inputInt("Choice : ")) {
-                case 1 -> loginUser();
-                case 2 -> registerUser();
+        switch (Input.inputInt("Choice : ")) {
+            case 1 -> loginUser();
+            case 2 -> registerUser();
 
-            }
         }
     }
 
@@ -26,15 +28,15 @@ public class LoginView {
         System.out.println("Registration : ");
 
         String name = Input.inputStr("Name : ");
-        Integer number = Input.inputInt("Number : ");
+        String number = Input.inputStr("Number : ");
         String nickname = Input.inputStr("Nickname : ");
 
         while (!userService.checkUnique(number, nickname)) {
             Message.failure();
-            System.out.println("It is not unique number or nickname! Try ? 1 yes / 0 no");
+            System.out.println("It is not unique number or nickname! Try again ? 1 yes / 0 no");
 
             if (Input.inputStr("Choice : ").equals("1")) {
-                number = Input.inputInt("Number : ");
+                number = Input.inputStr("Number : ");
                 nickname = Input.inputStr("Nickname : ");
             } else {
                 return;
@@ -45,10 +47,30 @@ public class LoginView {
 
         Main.curUser = userService.getAndAdd(name, number, nickname, password);
 
-        System.out.println("Welcome! " + Main.curUser);
+        Message.success();
+        System.out.println("Welcome! " + Main.curUser.getName());
     }
 
     private static void loginUser() {
+        System.out.println("Log In : ");
+
+        String nickOrNum = Input.inputStr("Nickname or number : ");
+        String password = Input.inputStr("Password : ");
+
+        Optional<Users> userOpt = userService.findUser(new LoginDTO(nickOrNum, password));
+
+        userOpt.ifPresentOrElse((user) -> {
+            Main.curUser = user;
+            Message.success();
+            System.out.println("Welcome! " + Main.curUser.getName());
+        }, () -> {
+            Message.failure();
+            System.out.println("Wrong number | nickname or password ! Try again ? 1 yes / 0 no");
+
+            if (Input.inputStr("Choice : ").equals("1")) {
+                loginUser();
+            }
+        });
 
     }
 
