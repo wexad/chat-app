@@ -1,11 +1,13 @@
 package uz.pdp.backend.service.user_service;
 
+import uz.pdp.backend.dto.LoginDTO;
 import uz.pdp.backend.model.user.Users;
 
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
 
@@ -59,7 +61,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean checkUnique(Integer number, String nickname) {
+    public boolean checkUnique(String number, String nickname) {
         for (Users user : users) {
             if (user.getNickname().equals(nickname) || user.getNumber().equals(number)) {
                 return false;
@@ -69,9 +71,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Users getAndAdd(String name, Integer number, String nickname, String password) {
+    public Users getAndAdd(String name, String number, String nickname, String password) {
         Users user = new Users(name, number, nickname, password, LocalTime.now());
         users.add(user);
         return user;
+    }
+
+    @Override
+    public Optional<Users> findUser(LoginDTO loginDTO) {
+        for (Users user : users) {
+            if (user.getNickname().equals(loginDTO.nickOrNum()) || user.getNumber().equals(loginDTO.nickOrNum()) &&
+                    user.getPassword().equals(loginDTO.password())) {
+                return Optional.of(user);
+            }
+        }
+        return Optional.empty();
     }
 }

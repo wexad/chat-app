@@ -7,12 +7,12 @@ import java.time.LocalTime;
 
 public class Users extends BaseModel {
     private String name;
-    private Integer number;
+    private String number;
     private String nickname;
     private String password;
     private LocalTime lastActivity;
 
-    public Users(String name, Integer number, String nickname, String password, LocalTime lastActivity) {
+    public Users(String name, String number, String nickname, String password, LocalTime lastActivity) {
         this.name = name;
         this.number = number;
         this.nickname = nickname;
@@ -28,11 +28,11 @@ public class Users extends BaseModel {
         this.name = name;
     }
 
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
@@ -58,5 +58,10 @@ public class Users extends BaseModel {
 
     public void setLastActivity(LocalTime lastActivity) {
         this.lastActivity = lastActivity;
+    }
+
+    @Override
+    public String toString() {
+        return nickname;
     }
 }
