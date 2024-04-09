@@ -17,6 +17,11 @@ public class ContactView {
     public static void addContact() {
         String number = Input.inputStr("Enter number : ");
 
+        if (number.equals(Main.curUser.getNumber())) {
+            System.out.println("It is your number idiot! ");
+            return;
+        }
+
         String contactId = userService.getUserByNumber(number);
 
         if (contactId == null) {
