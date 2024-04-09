@@ -6,7 +6,7 @@ import uz.pdp.backend.model.baseModel.BaseModel;
 import java.sql.Time;
 import java.time.LocalTime;
 
-public class Messages extends BaseModel implements Comparable{
+public class Messages extends BaseModel implements Comparable {
     private String text;
     private final MessageType type;
     private final String userId;
@@ -58,5 +58,10 @@ public class Messages extends BaseModel implements Comparable{
     @Override
     public int compareTo(Object o) {
         return this.time.compareTo(((Messages) o).time);
+    }
+
+    @Override
+    public String toString() {
+        return text + " ( " + "\u001B[35m" + time + " ) " + "\u001B[0m";
     }
 }

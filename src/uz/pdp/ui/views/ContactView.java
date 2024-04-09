@@ -1,6 +1,9 @@
 package uz.pdp.ui.views;
 
+import uz.pdp.backend.model.chat.Chats;
 import uz.pdp.backend.model.contact.Contacts;
+import uz.pdp.backend.service.chat_service.ChatService;
+import uz.pdp.backend.service.chat_service.ChatServiceImpl;
 import uz.pdp.backend.service.contact_service.ContactService;
 import uz.pdp.backend.service.contact_service.ContactServiceImpl;
 import uz.pdp.backend.service.user_service.UserService;
@@ -13,6 +16,7 @@ public class ContactView {
 
     static UserService userService = UserServiceImpl.getInstance();
     static ContactService contactService = ContactServiceImpl.getInstance();
+    static ChatService chatService = ChatServiceImpl.getInstance();
 
     public static void addContact() {
         String number = Input.inputStr("Enter number : ");
@@ -44,6 +48,8 @@ public class ContactView {
             if (contactService.add(contacts)) {
                 Message.success();
                 System.out.println("New contact created successfully! ");
+
+                chatService.add(new Chats(Main.curUser.getId(), contactId));
             }
 
         }

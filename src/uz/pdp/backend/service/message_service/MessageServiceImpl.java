@@ -1,5 +1,7 @@
 package uz.pdp.backend.service.message_service;
 
+import uz.pdp.backend.enums.MessageType;
+import uz.pdp.backend.model.chat.Chats;
 import uz.pdp.backend.model.message.Messages;
 
 import java.util.ArrayList;
@@ -46,5 +48,18 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<Messages> getList() {
         return messages;
+    }
+
+    @Override
+    public List<Messages> getMessagesOfChat(Chats chat) {
+        List<Messages> messagesOfChat = new ArrayList<>();
+
+        for (Messages message : messages) {
+            if (message.getType().equals(MessageType.PRIVATE) && message.getToId().equals(chat.getId())) {
+                messagesOfChat.add(message);
+            }
+        }
+
+        return messagesOfChat;
     }
 }

@@ -48,4 +48,15 @@ public class ChatServiceImpl implements ChatService {
     public List<Chats> getList() {
         return chats;
     }
+
+    @Override
+    public List<Chats> getChatsOfUser(String id) {
+        List<Chats> chatsOfUser = new ArrayList<>();
+        for (Chats chat : chats) {
+            if (chat.getFirstUserId().equals(id) || chat.getSecondUserId().equals(id)) {
+                chatsOfUser.add(chat);
+            }
+        }
+        return chatsOfUser;
+    }
 }
