@@ -53,7 +53,9 @@ public class Main {
                 default -> Message.failure();
             }
 
-            MainView.start();
-        } while ( choice != 0);
+            if (curUser != null) {
+                MainView.start();
+            }
+        } while (choice != 0);
     }
 }
