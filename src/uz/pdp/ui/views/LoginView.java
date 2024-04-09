@@ -14,17 +14,7 @@ public class LoginView {
 
     static UserService userService = UserServiceImpl.getInstance();
 
-    public static void start() {
-        displayMenu();
-
-        switch (Input.inputInt("Choice : ")) {
-            case 1 -> loginUser();
-            case 2 -> registerUser();
-
-        }
-    }
-
-    private static void registerUser() {
+    public static void registerUser() {
         System.out.println("Registration : ");
 
         String name = Input.inputStr("Name : ");
@@ -51,7 +41,7 @@ public class LoginView {
         System.out.println("Welcome! " + Main.curUser.getName());
     }
 
-    private static void loginUser() {
+    public static void loginUser() {
         System.out.println("Log In : ");
 
         String nickOrNum = Input.inputStr("Nickname or number : ");
@@ -74,11 +64,12 @@ public class LoginView {
 
     }
 
-    private static void displayMenu() {
+    public static void displayMenu() {
         System.out.println("""
                 1. Log In
                 2. Sign Up
                                 
+                0. Exit
                 """);
     }
 }

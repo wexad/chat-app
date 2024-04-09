@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl() {
         this.users = new ArrayList<>();
+        users.add(new Users("a","a","a","a",LocalTime.now()));
     }
 
     public static UserService getInstance() {

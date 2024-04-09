@@ -19,8 +19,12 @@ import uz.pdp.backend.service.post_service.PostService;
 import uz.pdp.backend.service.post_service.PostServiceImpl;
 import uz.pdp.backend.service.user_service.UserService;
 import uz.pdp.backend.service.user_service.UserServiceImpl;
+import uz.pdp.ui.utils.Input;
+import uz.pdp.ui.utils.Message;
 import uz.pdp.ui.views.LoginView;
-import uz.pdp.ui.views.MainView;
+
+import static uz.pdp.ui.views.LoginView.loginUser;
+import static uz.pdp.ui.views.LoginView.registerUser;
 
 public class Main {
 
@@ -37,14 +41,16 @@ public class Main {
     public static Users curUser;
 
     public static void main(String[] args) {
-        System.out.println("Welcome! To our new chat application! ");
-        boolean isFinished;
-        while (true) {
-            if (curUser == null) {
-                LoginView.start();
-                continue;
+        Integer choice;
+        do {
+            LoginView.displayMenu();
+            choice = Input.inputInt("Your choice : ");
+            switch (choice) {
+                case 1 -> loginUser();
+                case 2 -> registerUser();
+                case 0 -> Message.goodbye();
+                default -> Message.failure();
             }
-
-        }
+        } while ( choice != 0);
     }
 }
