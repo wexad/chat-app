@@ -4,6 +4,7 @@ import uz.pdp.backend.dto.LoginDTO;
 import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.base_service.BaseService;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService extends BaseService<Users> {
@@ -14,6 +15,8 @@ public interface UserService extends BaseService<Users> {
     Optional<Users> findUser(LoginDTO loginDTO);
 
     String getUserByNumber(String number);
+
+    List<Users> getUsersByWord(String s);
 }
 
 

@@ -3,6 +3,7 @@ package uz.pdp.ui.views;
 import uz.pdp.backend.enums.MessageType;
 import uz.pdp.backend.model.chat.Chats;
 import uz.pdp.backend.model.message.Messages;
+import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.chat_service.ChatService;
 import uz.pdp.backend.service.chat_service.ChatServiceImpl;
 import uz.pdp.backend.service.message_service.MessageService;
@@ -38,6 +39,8 @@ public class ChatsView {
     }
 
     private static void searchUser() {
+        List<Users> usersByWord = userService.getUsersByWord(Input.inputStr("Search : "));
+
 
     }
 

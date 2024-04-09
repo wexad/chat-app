@@ -91,4 +91,9 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public List<Users> getUsersByWord(String s) {
+        return null;
+    }
 }
