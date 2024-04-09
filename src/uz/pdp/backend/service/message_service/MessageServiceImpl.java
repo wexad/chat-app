@@ -25,21 +25,26 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public boolean add(Messages o) {
-        return false;
+        return messages.add(o);
     }
 
     @Override
-    public boolean delete(Messages messages) {
-        return false;
+    public boolean delete(Messages message) {
+        return messages.remove(message);
     }
 
     @Override
-    public Messages get(String id) {
+    public Messages get(String messageId) {
+        for (Messages message : messages) {
+            if (message.getId().equals(messageId)) {
+                return message;
+            }
+        }
         return null;
     }
 
     @Override
     public List<Messages> getList() {
-        return null;
+        return messages;
     }
 }

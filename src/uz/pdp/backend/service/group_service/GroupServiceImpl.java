@@ -25,21 +25,26 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public boolean add(Groups o) {
-        return false;
+        return groups.add(o);
     }
 
     @Override
-    public boolean delete(Groups groups) {
-        return false;
+    public boolean delete(Groups group) {
+        return groups.remove(group);
     }
 
     @Override
-    public Groups get(String id) {
+    public Groups get(String groupId) {
+        for (Groups group : groups) {
+            if (group.getId().equals(groupId)) {
+                return group;
+            }
+        }
         return null;
     }
 
     @Override
     public List<Groups> getList() {
-        return null;
+        return groups;
     }
 }

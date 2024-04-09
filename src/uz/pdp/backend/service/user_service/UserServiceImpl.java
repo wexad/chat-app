@@ -31,25 +31,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean add(Users o) {
-        users.add(o);
-        return true;
+        return users.add(o);
     }
 
     @Override
     public boolean delete(Users user) {
-        for (Users user1 : users) {
-            if (user1.getId().equals(user.getId())) {
-                users.remove(user);
-                return true;
-            }
-        }
-        return false;
+        return users.remove(user);
     }
 
     @Override
-    public Users get(String id) {
+    public Users get(String userId) {
         for (Users user : users) {
-            if (user.getId().equals(id)) {
+            if (user.getId().equals(userId)) {
                 return user;
             }
         }

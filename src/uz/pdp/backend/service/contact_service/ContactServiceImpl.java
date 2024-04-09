@@ -19,27 +19,31 @@ public class ContactServiceImpl implements ContactService {
         if (contactService == null) {
             contactService = new ContactServiceImpl();
         }
-
         return contactService;
     }
 
     @Override
     public boolean add(Contacts o) {
-        return false;
+        return contacts.add(o);
     }
 
     @Override
-    public boolean delete(Contacts contacts) {
-        return false;
+    public boolean delete(Contacts contact) {
+        return contacts.remove(contact);
     }
 
     @Override
-    public Contacts get(String id) {
+    public Contacts get(String contactId) {
+        for (Contacts contact : contacts) {
+            if (contact.getId().equals(contactId)) {
+                return contact;
+            }
+        }
         return null;
     }
 
     @Override
     public List<Contacts> getList() {
-        return null;
+        return contacts;
     }
 }

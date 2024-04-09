@@ -25,21 +25,26 @@ public class ChannelServiceImpl implements ChannelService {
 
     @Override
     public boolean add(Channels o) {
-        return false;
+        return channels.add(o);
     }
 
     @Override
-    public boolean delete(Channels channels) {
-        return false;
+    public boolean delete(Channels channel) {
+        return channels.remove(channel);
     }
 
     @Override
-    public Channels get(String id) {
+    public Channels get(String channelId) {
+        for (Channels channel : channels) {
+            if (channel.getId().equals(channelId)) {
+                return channel;
+            }
+        }
         return null;
     }
 
     @Override
     public List<Channels> getList() {
-        return null;
+        return channels;
     }
 }

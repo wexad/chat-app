@@ -19,27 +19,31 @@ public class PostServiceImpl implements PostService {
         if (postService == null) {
             postService = new PostServiceImpl();
         }
-
         return postService;
     }
 
     @Override
     public boolean add(Posts o) {
-        return false;
+        return posts.add(o);
     }
 
     @Override
-    public boolean delete(Posts posts) {
-        return false;
+    public boolean delete(Posts post) {
+        return posts.remove(post);
     }
 
     @Override
-    public Posts get(String id) {
+    public Posts get(String postId) {
+        for (Posts post : posts) {
+            if (post.getId().equals(postId)) {
+                return post;
+            }
+        }
         return null;
     }
 
     @Override
     public List<Posts> getList() {
-        return null;
+        return posts;
     }
 }

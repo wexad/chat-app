@@ -4,6 +4,7 @@ import uz.pdp.backend.model.channel.ChannelUsers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ChannelUserServiceImpl implements ChannelUserService {
     private static ChannelUserService channelUserService;
@@ -24,21 +25,26 @@ public class ChannelUserServiceImpl implements ChannelUserService {
 
     @Override
     public boolean add(ChannelUsers o) {
-        return false;
+        return channelUsers.add(o);
     }
 
     @Override
-    public boolean delete(ChannelUsers channelUsers) {
-        return false;
+    public boolean delete(ChannelUsers channelUser) {
+        return channelUsers.remove(channelUser);
     }
 
     @Override
-    public ChannelUsers get(String id) {
+    public ChannelUsers get(String channelUserId) {
+        for (ChannelUsers channelUser : channelUsers) {
+            if (channelUser.getId().equals(channelUserId)) {
+                return channelUser;
+            }
+        }
         return null;
     }
 
     @Override
     public List<ChannelUsers> getList() {
-        return null;
+        return channelUsers;
     }
 }
