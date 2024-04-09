@@ -80,7 +80,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<Users> findUser(LoginDTO loginDTO) {
         for (Users user : users) {
-            if (user.getNickname().equals(loginDTO.nickOrNum()) || user.getNumber().equals(loginDTO.nickOrNum()) &&
+            if ((user.getNickname().equals(loginDTO.nickOrNum()) ||
+                    user.getNumber().equals(loginDTO.nickOrNum())) &&
                     user.getPassword().equals(loginDTO.password())) {
                 return Optional.of(user);
             }
