@@ -94,6 +94,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Users> getUsersByWord(String s) {
-        return null;
+        ArrayList<Users> searchedUsers = new ArrayList<>();
+        for (Users user : users) {
+            if (user.getNickname().contains(s)) {
+                searchedUsers.add(user);
+            }
+        }
+        return searchedUsers;
     }
 }
