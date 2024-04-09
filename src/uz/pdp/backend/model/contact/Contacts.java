@@ -5,12 +5,12 @@ import uz.pdp.backend.model.baseModel.BaseModel;
 public class Contacts extends BaseModel implements Comparable {
 
     private final String userId;
-    private String id;
+    private String contactId;
     private String name;
 
-    public Contacts(String userId, String id, String name) {
+    public Contacts(String userId, String contactId, String name) {
         this.userId = userId;
-        this.id = id;
+        this.contactId = contactId;
         this.name = name;
     }
 
@@ -20,7 +20,7 @@ public class Contacts extends BaseModel implements Comparable {
 
     @Override
     public String getId() {
-        return id;
+        return contactId;
     }
 
     public String getName() {
@@ -31,8 +31,8 @@ public class Contacts extends BaseModel implements Comparable {
         this.name = name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setContactId(String contactId) {
+        this.contactId = contactId;
     }
 
     @Override

@@ -3,7 +3,6 @@ package uz.pdp.backend.service.user_service;
 import uz.pdp.backend.dto.LoginDTO;
 import uz.pdp.backend.model.user.Users;
 
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,5 +80,15 @@ public class UserServiceImpl implements UserService {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public String getUserByNumber(String number) {
+        for (Users user : users) {
+            if (user.getNumber().equals(number)) {
+                return user.getId();
+            }
+        }
+        return null;
     }
 }

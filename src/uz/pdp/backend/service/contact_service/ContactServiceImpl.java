@@ -33,9 +33,9 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contacts get(String contactId) {
+    public Contacts get(String id) {
         for (Contacts contact : contacts) {
-            if (contact.getId().equals(contactId)) {
+            if (contact.getId().equals(id)) {
                 return contact;
             }
         }
@@ -49,6 +49,11 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public boolean isExist(String id, String contactId) {
+        for (Contacts contact : contacts) {
+            if (contact.getUserId().equals(id) && contact.getId().equals(contactId)) {
+                return true;
+            }
+        }
         return false;
     }
 }

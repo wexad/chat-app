@@ -20,6 +20,7 @@ public class Users extends BaseModel {
         this.lastActivity = lastActivity;
     }
 
+
     public String getName() {
         return name;
     }

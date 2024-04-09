@@ -4,7 +4,6 @@ import uz.pdp.backend.model.channel.ChannelUsers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ChannelUserServiceImpl implements ChannelUserService {
     private static ChannelUserService channelUserService;
