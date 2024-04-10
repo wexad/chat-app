@@ -41,7 +41,30 @@ public class ChatsView {
     private static void searchUser() {
         List<Users> usersByWord = userService.getUsersByWord(Input.inputStr("Search : "));
 
+        showSearchedUsers(usersByWord);
 
+        int index = Input.inputInt("Choice(0 - exit) : ") - 1;
+
+        if (index == -1) {
+            return;
+        }
+
+        if (index < usersByWord.size()) {
+            Chats chats = new Chats(Main.curUser.getId(), usersByWord.get(index).getId());
+            chatService.add(chats);
+
+            sendMessageToChat(chats);
+
+        }
+    }
+
+    private static void showSearchedUsers(List<Users> usersByWord) {
+        int i = 1;
+        System.out.println("Users : ");
+        for (Users users : usersByWord) {
+            System.out.println(i++ + ". " + users);
+        }
+        System.out.println("=====================");
     }
 
     private static void sendMessage() {
@@ -96,6 +119,7 @@ public class ChatsView {
                 messages.setRead(true);
             }
         }
+        System.out.println("===========================");
     }
 
     private static void showChats(List<Chats> chatsOfUser) {
@@ -108,6 +132,7 @@ public class ChatsView {
                 System.out.println(i++ + ". " + userService.get(chats.getFirstUserId()));
             }
         }
+        System.out.println("==========================");
     }
 
     private static void displayMenu() {
