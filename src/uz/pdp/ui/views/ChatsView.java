@@ -2,10 +2,13 @@ package uz.pdp.ui.views;
 
 import uz.pdp.backend.enums.MessageType;
 import uz.pdp.backend.model.chat.Chats;
+import uz.pdp.backend.model.contact.Contacts;
 import uz.pdp.backend.model.message.Messages;
 import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.chat_service.ChatService;
 import uz.pdp.backend.service.chat_service.ChatServiceImpl;
+import uz.pdp.backend.service.contact_service.ContactService;
+import uz.pdp.backend.service.contact_service.ContactServiceImpl;
 import uz.pdp.backend.service.message_service.MessageService;
 import uz.pdp.backend.service.message_service.MessageServiceImpl;
 import uz.pdp.backend.service.user_service.UserService;
@@ -22,6 +25,7 @@ public class ChatsView {
     static ChatService chatService = ChatServiceImpl.getInstance();
     static UserService userService = UserServiceImpl.getInstance();
     static MessageService messageService = MessageServiceImpl.getInstance();
+    static ContactService contactService = ContactServiceImpl.getInstance();
 
     public static void start() {
         Integer choice;
@@ -65,8 +69,13 @@ public class ChatsView {
     private static void showSearchedUsers(List<Users> usersByWord) {
         int i = 1;
         System.out.println("Users : ");
-        for (Users users : usersByWord) {
-            System.out.println(i++ + ". " + users);
+        for (Users user : usersByWord) {
+            Contacts contact = contactService.getContact(Main.curUser.getId(), user.getId());
+            if (contact != null) {
+                System.out.println(i++ + ". " + contact.getName());
+            } else {
+                System.out.println(i++ + ". " + user);
+            }
         }
         System.out.println("=====================");
     }
@@ -136,11 +145,11 @@ public class ChatsView {
     private static void showChats(List<Chats> chatsOfUser) {
         System.out.println("Chats : ");
         int i = 1;
-        for (Chats chats : chatsOfUser) {
-            if (chats.getFirstUserId().equals(Main.curUser.getId())) {
-                System.out.println(i++ + ". " + userService.get(chats.getSecondUserId()));
+        for (Chats chat : chatsOfUser) {
+            if (chat.getFirstUserId().equals(Main.curUser.getId())) {
+                System.out.println(i++ + ". " + userService.get(chat.getSecondUserId()));
             } else {
-                System.out.println(i++ + ". " + userService.get(chats.getFirstUserId()));
+                System.out.println(i++ + ". " + userService.get(chat.getFirstUserId()));
             }
         }
         System.out.println("==========================");

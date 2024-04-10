@@ -23,6 +23,10 @@ public class Contacts extends BaseModel implements Comparable {
         return contactId;
     }
 
+    public String getContactId() {
+        return contactId;
+    }
+
     public String getName() {
         return name;
     }

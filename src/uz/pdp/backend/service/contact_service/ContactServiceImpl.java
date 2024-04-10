@@ -56,4 +56,25 @@ public class ContactServiceImpl implements ContactService {
         }
         return false;
     }
+
+    @Override
+    public List<Contacts> getContacts(String userId) {
+        ArrayList<Contacts> contactsArrayList = new ArrayList<>();
+        for (Contacts contact : contacts) {
+            if (contact.getUserId().equals(userId)) {
+                contactsArrayList.add(contact);
+            }
+        }
+        return contactsArrayList;
+    }
+
+    @Override
+    public Contacts getContact(String userId, String contactId) {
+        for (Contacts contact : contacts) {
+            if (contact.getUserId().equals(userId) && contact.getContactId().equals(contactId)) {
+                return contact;
+            }
+        }
+        return null;
+    }
 }
