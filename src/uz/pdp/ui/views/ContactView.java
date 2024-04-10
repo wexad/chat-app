@@ -13,7 +13,6 @@ import uz.pdp.ui.utils.Input;
 import uz.pdp.ui.utils.Message;
 
 public class ContactView {
-
     static UserService userService = UserServiceImpl.getInstance();
     static ContactService contactService = ContactServiceImpl.getInstance();
     static ChatService chatService = ChatServiceImpl.getInstance();
@@ -48,10 +47,10 @@ public class ContactView {
             if (contactService.add(contacts)) {
                 Message.success();
                 System.out.println("New contact created successfully! ");
-
-                chatService.add(new Chats(Main.curUser.getId(), contactId));
+                if (chatService.getChatOfUser(Main.curUser.getId()) == null) {
+                    chatService.add(new Chats(Main.curUser.getId(), contactId));
+                }
             }
-
         }
 
     }

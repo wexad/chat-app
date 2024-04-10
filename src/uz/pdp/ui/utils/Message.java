@@ -13,6 +13,9 @@ public interface Message {
     static void saved() {
         System.out.println("\u001B[34m" + "Saved! " + "\u001B[0m");
     }
+    static void noData() {
+        System.out.println("\u001B[34m" + "There is no data " + "\u001B[0m");
+    }
     static void goodbye() {
         System.out.println("\u001B[32m" + "Goodbye!"+ "\u001B[0m");
     }

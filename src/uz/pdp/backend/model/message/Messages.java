@@ -62,6 +62,6 @@ public class Messages extends BaseModel implements Comparable {
 
     @Override
     public String toString() {
-        return text + " ( " + "\u001B[35m" + time + " ) " + "\u001B[0m";
+        return text + "\u001B[35m  " + time.getHour() + " : "  + time.getMinute() + "\u001B[0m";
     }
 }

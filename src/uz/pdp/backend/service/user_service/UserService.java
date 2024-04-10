@@ -16,7 +16,7 @@ public interface UserService extends BaseService<Users> {
 
     String getUserByNumber(String number);
 
-    List<Users> getUsersByWord(String s);
+    List<Users> getUsersByWord(String s, String currUserId);
 }
 
 

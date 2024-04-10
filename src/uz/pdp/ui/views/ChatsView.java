@@ -39,8 +39,12 @@ public class ChatsView {
     }
 
     private static void searchUser() {
-        List<Users> usersByWord = userService.getUsersByWord(Input.inputStr("Search : "));
+        List<Users> usersByWord = userService.getUsersByWord(Input.inputStr("Search : "), Main.curUser.getId());
 
+        if (usersByWord.isEmpty()) {
+            Message.noData();
+            return;
+        }
         showSearchedUsers(usersByWord);
 
         int index = Input.inputInt("Choice(0 - exit) : ") - 1;
@@ -50,10 +54,10 @@ public class ChatsView {
         }
 
         if (index < usersByWord.size()) {
-            Chats chats = new Chats(Main.curUser.getId(), usersByWord.get(index).getId());
-            chatService.add(chats);
-
-            sendMessageToChat(chats);
+            if (!chatService.isExist(usersByWord.get(index).getId())) {
+                chatService.add(new Chats(Main.curUser.getId(), usersByWord.get(index).getId()));
+            }
+            sendMessageToChat(chatService.getChatOfUser(Main.curUser.getId()));
 
         }
     }
@@ -69,7 +73,10 @@ public class ChatsView {
 
     private static void sendMessage() {
         List<Chats> chatOfUser = chatService.getChatsOfUser(Main.curUser.getId());
-
+        if (chatOfUser.isEmpty()) {
+            Message.noData();
+            return;
+        }
         showChats(chatOfUser);
 
         int index = Input.inputInt("Choose (0 - exit) : ") - 1;
@@ -86,9 +93,9 @@ public class ChatsView {
     private static void sendMessageToChat(Chats chat) {
         while (true) {
             if (chat.getFirstUserId().equals(Main.curUser.getId())) {
-                System.out.println("\t".repeat(4) + userService.get(chat.getSecondUserId()));
+                System.out.println("\t".repeat(3) + userService.get(chat.getSecondUserId()));
             } else {
-                System.out.println("\t".repeat(4) + userService.get(chat.getFirstUserId()));
+                System.out.println("\t".repeat(3) + userService.get(chat.getFirstUserId()));
             }
             showChatHistory(chat);
 
@@ -113,7 +120,11 @@ public class ChatsView {
 
         for (Messages messages : messagesOfChat) {
             if (messages.getUserId().equals(Main.curUser.getId())) {
-                System.out.println("\t".repeat(3) + messages);
+                if (messages.isRead()) {
+                    System.out.println("\t".repeat(6) + messages);
+                } else {
+                    System.out.println("\t".repeat(6) + messages + " 👀");
+                }
             } else {
                 System.out.println(messages);
                 messages.setRead(true);

@@ -50,13 +50,33 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public List<Chats> getChatsOfUser(String id) {
+    public List<Chats> getChatsOfUser(String userId) {
         List<Chats> chatsOfUser = new ArrayList<>();
         for (Chats chat : chats) {
-            if (chat.getFirstUserId().equals(id) || chat.getSecondUserId().equals(id)) {
+            if (chat.getFirstUserId().equals(userId) || chat.getSecondUserId().equals(userId)) {
                 chatsOfUser.add(chat);
             }
         }
         return chatsOfUser;
+    }
+
+    @Override
+    public Chats getChatOfUser(String userId) {
+        for (Chats chat : chats) {
+            if (chat.getFirstUserId().equals(userId) || chat.getSecondUserId().equals(userId)) {
+                return chat;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isExist(String userId) {
+        for (Chats chat : chats) {
+            if (chat.getFirstUserId().equals(userId) || chat.getSecondUserId().equals(userId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
