@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface MessageService extends BaseService<Messages> {
     List<Messages> getMessagesOfChat(Chats chat);
+
+    List<Messages> getMessagesGroupOrChannel(String Id);
+
+    int countNotReadMessages(String fromId, String toId);
 }

@@ -45,4 +45,14 @@ public class GroupUserServiceImpl implements GroupUserService {
     public List<GroupUsers> getList() {
         return groupUsers;
     }
+
+    @Override
+    public int getCountOfMembers(String id) {
+        return 0;
+    }
+
+    @Override
+    public boolean isAdmin(String id, String groupId) {
+        return false;
+    }
 }

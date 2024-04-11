@@ -47,4 +47,9 @@ public class GroupServiceImpl implements GroupService {
     public List<Groups> getList() {
         return groups;
     }
+
+    @Override
+    public List<Groups> getGroupsOfUser(String id) {
+        return null;
+    }
 }

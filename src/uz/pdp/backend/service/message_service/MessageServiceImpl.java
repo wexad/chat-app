@@ -62,4 +62,14 @@ public class MessageServiceImpl implements MessageService {
 
         return messagesOfChat;
     }
+
+    @Override
+    public List<Messages> getMessagesGroupOrChannel(String Id) {
+        return null;
+    }
+
+    @Override
+    public int countNotReadMessages(String fromId, String toId) {
+        return 0;
+    }
 }

@@ -142,15 +142,17 @@ public class ChatsView {
         System.out.println("===========================");
     }
 
-    private static void showChats(List<Chats> chatsOfUser) {
+    public static void showChats(List<Chats> chatsOfUser) {
         System.out.println("Chats : ");
         int i = 1;
         for (Chats chat : chatsOfUser) {
+            Users secondUser;
             if (chat.getFirstUserId().equals(Main.curUser.getId())) {
-                System.out.println(i++ + ". " + userService.get(chat.getSecondUserId()));
+                secondUser = userService.get(chat.getSecondUserId());
             } else {
-                System.out.println(i++ + ". " + userService.get(chat.getFirstUserId()));
+                secondUser = userService.get(chat.getFirstUserId());
             }
+            System.out.println(i++ + secondUser.toString() + " | last activity : " + secondUser.getLastActivity() + " | " + messageService.countNotReadMessages(secondUser.getId(), Main.curUser.getId()));
         }
         System.out.println("==========================");
     }
