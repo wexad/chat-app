@@ -1,6 +1,7 @@
 package uz.pdp.backend.service.group_service.group_user_service;
 
 import uz.pdp.backend.model.group.GroupUsers;
+import uz.pdp.backend.model.user.Users;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,5 +55,20 @@ public class GroupUserServiceImpl implements GroupUserService {
     @Override
     public boolean isAdmin(String id, String groupId) {
         return false;
+    }
+
+    @Override
+    public List<Users> getMembers(String groupId) {
+        return null;
+    }
+
+    @Override
+    public void deleteByMemberId(String id) {
+
+    }
+
+    @Override
+    public void deleteAllMembers(String groupId) {
+
     }
 }

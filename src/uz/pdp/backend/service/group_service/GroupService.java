@@ -7,4 +7,12 @@ import java.util.List;
 
 public interface GroupService extends BaseService<Groups> {
     List<Groups> getGroupsOfUser(String id);
+
+    void deleteById(String groupId);
+
+    boolean isUnique(String name);
+
+    List<Groups> getGroupsByWord(String search);
+
+    boolean isMember();
 }

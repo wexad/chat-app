@@ -52,4 +52,24 @@ public class GroupServiceImpl implements GroupService {
     public List<Groups> getGroupsOfUser(String id) {
         return null;
     }
+
+    @Override
+    public void deleteById(String groupId) {
+
+    }
+
+    @Override
+    public boolean isUnique(String name) {
+        return false;
+    }
+
+    @Override
+    public List<Groups> getGroupsByWord(String search) {
+        return null;
+    }
+
+    @Override
+    public boolean isMember() {
+        return false;
+    }
 }

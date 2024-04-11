@@ -56,7 +56,7 @@ public class LoginView {
             System.out.println("Welcome! " + Main.curUser.getName());
         }, () -> {
             Message.failure();
-            System.out.println("Wrong number | nickname or password ! Try again ? 1 yes / 0 no");
+            System.out.println("Wrong number | nickname or password ! Do you want try again ? 1 yes / 0 no");
 
             if (Input.inputStr("Choice : ").equals("1")) {
                 loginUser();
