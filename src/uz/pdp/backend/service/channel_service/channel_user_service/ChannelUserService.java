@@ -20,4 +20,6 @@ public interface ChannelUserService extends BaseService<ChannelUsers> {
     List<Users> getAdmins(String channelId);
 
     void deleteAllMembers(String channelId);
+
+    void deleteByUserId(String id);
 }

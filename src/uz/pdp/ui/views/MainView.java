@@ -15,8 +15,7 @@ public class MainView {
                 case 2 -> ChatsView.start();
                 case 3 -> GroupsView.start();
                 case 4 -> ChannelsView.start();
-                case 5 -> GlobalSearchView.start();
-                case 6 -> SettingsView.start();
+                case 5 -> SettingsView.start();
                 case 0 -> LoginView.logOut();
 
                 default -> Message.failure();

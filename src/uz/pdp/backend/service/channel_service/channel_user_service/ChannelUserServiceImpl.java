@@ -82,4 +82,9 @@ public class ChannelUserServiceImpl implements ChannelUserService {
     public void deleteAllMembers(String channelId) {
 
     }
+
+    @Override
+    public void deleteByUserId(String id) {
+
+    }
 }

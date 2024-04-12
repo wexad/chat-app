@@ -102,4 +102,9 @@ public class UserServiceImpl implements UserService {
         }
         return searchedUsers;
     }
+
+    @Override
+    public void deleteByUserId(String id) {
+
+    }
 }

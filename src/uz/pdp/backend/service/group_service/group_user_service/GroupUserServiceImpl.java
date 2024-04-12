@@ -121,4 +121,24 @@ public class GroupUserServiceImpl implements GroupUserService {
         }
         return false;
     }
+
+    @Override
+    public List<Users> getAdminsWithinMe(String id) {
+        return null;
+    }
+
+    @Override
+    public void deleteAdminStatus(String id, String groupId) {
+
+    }
+
+    @Override
+    public int countAdmins(String groupId) {
+        return 0;
+    }
+
+    @Override
+    public void deleteByUserId(String id) {
+
+    }
 }
