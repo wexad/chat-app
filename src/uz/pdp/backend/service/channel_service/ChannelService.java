@@ -8,4 +8,10 @@ import java.util.List;
 
 public interface ChannelService extends BaseService<Channels> {
     List<Channels> getChannelsOfUser(String id);
+
+    void deleteById(String channelId);
+
+    List<Channels> getChannelsByWord(String search);
+
+    boolean isUniqueName(String name);
 }

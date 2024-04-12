@@ -1,6 +1,7 @@
 package uz.pdp.backend.service.channel_service.channel_user_service;
 
 import uz.pdp.backend.model.channel.ChannelUsers;
+import uz.pdp.backend.model.user.Users;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,26 @@ public class ChannelUserServiceImpl implements ChannelUserService {
 
     @Override
     public void deleteMember(String id, String channelId) {
+
+    }
+
+    @Override
+    public List<Users> getSubscribers(String channelId) {
+        return null;
+    }
+
+    @Override
+    public ChannelUsers getByMemberId(String id) {
+        return null;
+    }
+
+    @Override
+    public List<Users> getAdmins(String channelId) {
+        return null;
+    }
+
+    @Override
+    public void deleteAllMembers(String channelId) {
 
     }
 }

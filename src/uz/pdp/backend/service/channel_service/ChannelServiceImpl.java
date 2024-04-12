@@ -53,4 +53,19 @@ public class ChannelServiceImpl implements ChannelService {
     public List<Channels> getChannelsOfUser(String id) {
         return null;
     }
+
+    @Override
+    public void deleteById(String channelId) {
+
+    }
+
+    @Override
+    public List<Channels> getChannelsByWord(String search) {
+        return null;
+    }
+
+    @Override
+    public boolean isUniqueName(String name) {
+        return false;
+    }
 }

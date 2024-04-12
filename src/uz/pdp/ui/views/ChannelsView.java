@@ -1,5 +1,7 @@
 package uz.pdp.ui.views;
 
+import uz.pdp.backend.enums.Type;
+import uz.pdp.backend.model.channel.ChannelUsers;
 import uz.pdp.backend.model.channel.Channels;
 import uz.pdp.backend.model.message.Messages;
 import uz.pdp.backend.model.user.Users;
@@ -29,8 +31,9 @@ public class ChannelsView {
             displayMenu();
             choice = Input.inputInt("Choice : ");
 
+            List<Channels> channelsOfUser = channelService.getChannelsOfUser(Main.curUser.getId());
             switch (choice) {
-                case 1 -> channelMenu();
+                case 1 -> channelMenu(channelsOfUser);
 
                 case 2 -> createChannel();
 
@@ -40,16 +43,60 @@ public class ChannelsView {
     }
 
     private static void searchChannel() {
+        String search = Input.inputStr("Search : ");
 
+        List<Channels> channelsByWord = channelService.getChannelsByWord(search);
+
+        channelMenu(channelsByWord);
     }
 
     private static void createChannel() {
+        String name = Input.inputStr("Enter name : ");
+
+        if (!channelService.isUniqueName(name)) {
+            System.out.println("There is not unique name ! Do you want try again ? 1 yes / 0 no");
+
+            if (Input.inputInt("Choice : ") == 1) {
+                createChannel();
+            }
+        } else {
+            Type type = chooseType();
+            while (type == null) {
+                System.out.println("There is not unique name ! Do you want try again ? 1 yes / 0 no");
+                if (Input.inputInt("Choice : ") != 1) {
+                    return;
+                }
+                type = chooseType();
+
+            }
+
+            String description = Input.inputStr("Enter description : ");
+
+            Channels channel = new Channels(name, description, type);
+            channelService.add(channel);
+            Message.success();
+        }
     }
 
-    private static void channelMenu() {
+    private static Type chooseType() {
+        System.out.println("""
+                1. Private
+                2. Public
+                """);
+
+        int type = Input.inputInt("Chose : ");
+
+        Type[] types = Type.values();
+
+        if (type >= types.length) {
+            return null;
+        }
+        return types[type - 1];
+    }
+
+    private static void channelMenu(List<Channels> channels) {
         while (true) {
-            List<Channels> channelsOfUser = channelService.getChannelsOfUser(Main.curUser.getId());
-            String channelId = chooseChannel(channelsOfUser);
+            String channelId = chooseChannel(channels);
 
             if (channelId == null) {
                 return;
@@ -67,7 +114,15 @@ public class ChannelsView {
 
             if (admin) {
                 switch (choice) {
+                    case 1 -> sendMessage(channelId);
 
+                    case 2 -> makeAdmin(channelId);
+
+                    case 3 -> deleteAdmin(channelId);
+
+                    case 4 -> renameChannel(channelId);
+
+                    case 5 -> deleteChannel(channelId);
                 }
             } else {
                 switch (choice) {
@@ -80,6 +135,69 @@ public class ChannelsView {
                 }
             }
         }
+    }
+
+    private static void deleteChannel(String channelId) {
+        channelUserService.deleteAllMembers(channelId);
+
+        channelService.deleteById(channelId);
+
+        Message.success();
+    }
+
+    private static void renameChannel(String channelId) {
+        Channels channels = channelService.get(channelId);
+
+        String name = Input.inputStr("Enter new name " + channels.getName() + " --> (0 - cancel) : ");
+
+        if (name.equals("0")) {
+            return;
+        }
+
+        channels.setName(name);
+
+        Message.success();
+    }
+
+    private static void deleteAdmin(String channelId) {
+        List<Users> admins = channelUserService.getAdmins(channelId);
+
+        showUsers(admins);
+
+        int index = Input.inputInt("Choose (0 - cancel) : ") - 1;
+
+        if (index != -1 && index < admins.size()) {
+            ChannelUsers bySubscriberId = channelUserService.getByMemberId(admins.get(index).getId());
+
+            bySubscriberId.setAdmin(false);
+        }
+    }
+
+    private static void makeAdmin(String channelId) {
+        List<Users> subscribers = channelUserService.getSubscribers(channelId);
+
+        showUsers(subscribers);
+
+        int index = Input.inputInt("Choose (0 - cancel) : ") - 1;
+
+        if (index != -1 && index < subscribers.size()) {
+            ChannelUsers bySubscriberId = channelUserService.getByMemberId(subscribers.get(index).getId());
+
+            bySubscriberId.setAdmin(true);
+        }
+    }
+
+    private static void showUsers(List<Users> subscribers) {
+        System.out.println("Subscribers : ");
+        int i = 1;
+        for (Users subscriber : subscribers) {
+            System.out.println(i++ + ". " + subscriber);
+        }
+        System.out.println("=========================");
+    }
+
+    private static void sendMessage(String channelId) {
+
     }
 
     private static void exitFromChannel(String channelId) {
