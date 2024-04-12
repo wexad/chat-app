@@ -19,4 +19,10 @@ public interface GroupUserService extends BaseService<GroupUsers> {
     List<GroupUsers> getListOfGroupsByUserId(String userId);
 
     boolean isMember(String userId, String groupId);
+
+    List<Users> getAdminsWithinMe(String id);
+
+    void deleteAdminStatus(String id, String groupId);
+
+    int countAdmins(String groupId);
 }
