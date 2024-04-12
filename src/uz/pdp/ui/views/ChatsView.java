@@ -152,7 +152,12 @@ public class ChatsView {
             } else {
                 secondUser = userService.get(chat.getFirstUserId());
             }
-            System.out.println(i++ + secondUser.toString() + " | last activity : " + secondUser.getLastActivity() + " | " + messageService.countNotReadMessages(secondUser.getId(), Main.curUser.getId()));
+            Contacts contact = contactService.getContact(Main.curUser.getId(), secondUser.getId());
+            if (contact != null) {
+                System.out.println(i++ + contact.getName() + " | last activity : " + secondUser.getLastActivity() + " | " + messageService.countNotReadMessages(secondUser.getId(), Main.curUser.getId()));
+            } else {
+                System.out.println(i++ + secondUser.toString() + " | last activity : " + secondUser.getLastActivity() + " | " + messageService.countNotReadMessages(secondUser.getId(), Main.curUser.getId()));
+            }
         }
         System.out.println("==========================");
     }
