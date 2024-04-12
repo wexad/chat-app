@@ -1,12 +1,16 @@
 package uz.pdp.backend.service.group_service;
 
+import uz.pdp.backend.enums.Type;
+import uz.pdp.backend.model.group.GroupUsers;
 import uz.pdp.backend.model.group.Groups;
+import uz.pdp.backend.service.group_service.group_user_service.GroupUserService;
+import uz.pdp.backend.service.group_service.group_user_service.GroupUserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GroupServiceImpl implements GroupService {
-
+    static GroupUserService groupUserService = GroupUserServiceImpl.getInstance();
     private static GroupService groupService;
 
     private List<Groups> groups;
@@ -49,27 +53,44 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<Groups> getGroupsOfUser(String id) {
-        return null;
+    public List<Groups> getGroupsOfUser(String userId) {
+        List<Groups> groupsList = new ArrayList<>();
+        List<GroupUsers> listOfGroupsByUserId = groupUserService.getListOfGroupsByUserId(userId);
+        if (!listOfGroupsByUserId.isEmpty()) {
+            for (GroupUsers groupUsersList : listOfGroupsByUserId) {
+                groupsList.add(groupService.get(groupUsersList.getGroupId()));
+            }
+        }
+        return groupsList;
     }
 
     @Override
     public void deleteById(String groupId) {
-
+        for (Groups group : groups) {
+            if (group.getId().equals(groupId)) {
+                groups.remove(group);
+            }
+        }
     }
 
     @Override
     public boolean isUnique(String name) {
-        return false;
+        for (Groups group : groups) {
+            if (group.getName().equals(name)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
-    public List<Groups> getGroupsByWord(String search) {
-        return null;
-    }
-
-    @Override
-    public boolean isMember() {
-        return false;
+    public List<Groups> getGroupsByWord(String hint) {
+        List<Groups> groupsList = new ArrayList<>();
+        for (Groups group : groups) {
+            if (group.getName().contains(hint) && group.getType() != Type.PRIVATE) {
+                groupsList.add(group);
+            }
+        }
+        return groupsList;
     }
 }

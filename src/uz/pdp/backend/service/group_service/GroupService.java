@@ -6,13 +6,11 @@ import uz.pdp.backend.service.base_service.BaseService;
 import java.util.List;
 
 public interface GroupService extends BaseService<Groups> {
-    List<Groups> getGroupsOfUser(String id);
+    List<Groups> getGroupsOfUser(String userId);
 
     void deleteById(String groupId);
 
     boolean isUnique(String name);
 
-    List<Groups> getGroupsByWord(String search);
-
-    boolean isMember();
+    List<Groups> getGroupsByWord(String hint);
 }

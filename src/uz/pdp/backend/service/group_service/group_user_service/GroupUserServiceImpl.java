@@ -2,6 +2,8 @@ package uz.pdp.backend.service.group_service.group_user_service;
 
 import uz.pdp.backend.model.group.GroupUsers;
 import uz.pdp.backend.model.user.Users;
+import uz.pdp.backend.service.user_service.UserService;
+import uz.pdp.backend.service.user_service.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
 public class GroupUserServiceImpl implements GroupUserService {
 
     private static GroupUserService groupUserService;
+    static UserService userService = UserServiceImpl.getInstance();
 
     private List<GroupUsers> groupUsers;
 
@@ -42,48 +45,80 @@ public class GroupUserServiceImpl implements GroupUserService {
         return null;
     }
 
+
     @Override
     public List<GroupUsers> getList() {
         return groupUsers;
     }
 
     @Override
-    public int getCountOfMembers(String id) {
-        return 0;
+    public int getCountOfMembers(String groupId) {
+        int count = 0;
+        for (GroupUsers groupUser : groupUsers) {
+            if (groupUser.getGroupId().equals(groupId)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override
-    public boolean isAdmin(String id, String groupId) {
+    public boolean isAdmin(String userId, String groupId) {
+        for (GroupUsers groupUser : groupUsers) {
+            if (groupUser.getUserId().equals(userId) && groupUser.getGroupId().equals(groupId)) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public List<Users> getMembers(String groupId) {
-        return null;
+        List<Users> users = new ArrayList<>();
+        for (GroupUsers groupUser : groupUsers) {
+            if (groupUser.getGroupId().equals(groupId)) {
+                users.add(userService.get(groupUser.getUserId()));
+            }
+        }
+        return users;
     }
 
     @Override
-    public void deleteByMemberId(String id, String groupId) {
-
+    public void deleteByMemberId(String userId, String groupId) {
+        for (GroupUsers groupUser : groupUsers) {
+            if (groupUser.getGroupId().equals(groupId) && groupUser.getUserId().equals(userId)) {
+                groupUsers.remove(groupUser);
+            }
+        }
     }
 
     @Override
     public void deleteAllMembers(String groupId) {
-
+        for (GroupUsers groupUser : groupUsers) {
+            if (groupUser.getGroupId().equals(groupId)) {
+                groupUsers.remove(groupUser);
+            }
+        }
     }
 
     @Override
-    public int countAdmins(String groupId) {
-        return 0;
+    public List<GroupUsers> getListOfGroupsByUserId(String userId) {
+        List<GroupUsers> groupUsersList = new ArrayList<>();
+        for (GroupUsers groupUser : groupUsers) {
+            if (userId.equals(groupUser.getUserId())) {
+                groupUsersList.add(groupUser);
+            }
+        }
+        return groupUsersList;
     }
 
     @Override
-    public void deleteAdminStatus(String id, String groupId) {
-
-    }
-
-    @Override
-    public List<Users> getAdminsWithinMe(String userId) {
-        return null;
+    public boolean isMember(String userId, String groupId) {
+        for (GroupUsers groupUser : groupUsers) {
+            if (groupUser.getGroupId().equals(groupId) && groupUser.getUserId().equals(userId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

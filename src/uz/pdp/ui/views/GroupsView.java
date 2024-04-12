@@ -56,14 +56,17 @@ public class GroupsView {
         String search = Input.inputStr("Search group : ");
 
         List<Groups> groupsByWord = groupService.getGroupsByWord(search);
-
+        if (groupsByWord.isEmpty()) {
+            Message.noData();
+            return;
+        }
         String groupId = chooseGroup(groupsByWord);
 
         if (groupId == null) {
             return;
         }
 
-        if (!groupService.isMember()) {
+        if (!groupUserService.isMember(Main.curUser.getId(),groupId)) {
             int i = Input.inputInt("Do you want to sign this group : 1 yes / 0 no");
 
             if (i == 1) {
@@ -100,8 +103,7 @@ public class GroupsView {
 
             }
 
-            Groups group = new Groups(name, type);
-            groupService.add(group);
+            groupService.add(new Groups(name, type));
             Message.success();
         }
     }
@@ -125,7 +127,10 @@ public class GroupsView {
     private static void sendMessage() {
         while (true) {
             List<Groups> groupsOfUser = groupService.getGroupsOfUser(Main.curUser.getId());
-
+            if (groupsOfUser.isEmpty()) {
+                Message.noData();
+                return;
+            }
             String groupId = chooseGroup(groupsOfUser);
 
             if (groupId == null) {
@@ -226,7 +231,6 @@ public class GroupsView {
 
     private static void deleteGroup(String groupId) {
         groupService.deleteById(groupId);
-
         groupUserService.deleteAllMembers(groupId);
     }
 
@@ -393,7 +397,7 @@ public class GroupsView {
         System.out.println("""
                 1. Groups
                 2. Create a group
-                2. Search a group
+                3. Search a group
                                 
                 0. Go back
                 """);
