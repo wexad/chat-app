@@ -40,6 +40,11 @@ public class Contacts extends BaseModel implements Comparable {
     }
 
     @Override
+    public String toString() {
+        return name;
+    }
+
+    @Override
     public int compareTo(Object o) {
         return this.name.compareTo(((Contacts) o).name);
     }

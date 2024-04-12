@@ -52,5 +52,10 @@ public class Posts extends BaseModel implements Comparable {
     public int compareTo(Object o) {
         return this.time.compareTo(((Posts) o).time);
     }
+
+    @Override
+    public String toString() {
+        return text + "\u001B[35m  " + time.getHour() + " : " + time.getMinute() + "\u001B[0m";
+    }
 }
 

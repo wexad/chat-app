@@ -27,4 +27,9 @@ public class Groups extends BaseModel {
     public void setType(Type type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

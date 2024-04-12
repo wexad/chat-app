@@ -33,4 +33,9 @@ public class Channels extends BaseModel {
     public Type getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
