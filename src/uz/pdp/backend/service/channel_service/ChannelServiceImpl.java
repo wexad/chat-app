@@ -1,6 +1,7 @@
 package uz.pdp.backend.service.channel_service;
 
 import uz.pdp.backend.model.channel.Channels;
+import uz.pdp.backend.model.user.Users;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,5 +47,10 @@ public class ChannelServiceImpl implements ChannelService {
     @Override
     public List<Channels> getList() {
         return channels;
+    }
+
+    @Override
+    public List<Channels> getChannelsOfUser(String id) {
+        return null;
     }
 }

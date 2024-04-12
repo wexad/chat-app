@@ -141,11 +141,8 @@ public class GroupsView {
     private static void groupsMenu(String groupId) {
         while (true) {
             boolean admin = groupUserService.isAdmin(Main.curUser.getId(), groupId);
-            if (admin) {
-                displayAdminMenu();
-            } else {
-                displayMemberMenu();
-            }
+
+            displayGroupMenu(admin);
 
             switch (Input.inputInt("Choice : ")) {
                 case 1 -> addMember(groupId);
@@ -153,26 +150,38 @@ public class GroupsView {
                 case 2 -> sendMessageToGroup(groupId);
 
                 case 3 -> {
+                    exitFromGroup(groupId);
+                    return;
+                }
+
+                case 4 -> {
                     if (admin) {
                         makeAdmin(groupId);
                     }
                 }
 
-                case 4 -> {
-                    if (admin) {
-                        renameGroup(groupId);
-                    }
-                }
-
                 case 5 -> {
                     if (admin) {
-                        removeMember(groupId);
+                        deleteAdmin(groupId);
                     }
                 }
 
                 case 6 -> {
                     if (admin) {
+                        renameGroup(groupId);
+                    }
+                }
+
+                case 7 -> {
+                    if (admin) {
+                        removeMember(groupId);
+                    }
+                }
+
+                case 8 -> {
+                    if (admin) {
                         deleteGroup(groupId);
+                        return;
                     }
                 }
 
@@ -184,6 +193,37 @@ public class GroupsView {
         }
     }
 
+    private static void deleteAdmin(String groupId) {
+        List<Users> admins = groupUserService.getAdminsWithinMe(Main.curUser.getId());
+
+        if (admins.isEmpty()) {
+            Message.failure();
+            System.out.println("There is only 1 admin is you! ");
+            return;
+        }
+
+        showUsers(admins);
+
+        int index = Input.inputInt("Choose (0 - cancel) : ") - 1;
+
+        if (index != -1 && index < admins.size()) {
+            groupUserService.deleteAdminStatus(admins.get(index).getId(), groupId);
+            Message.success();
+        }
+    }
+
+    private static void exitFromGroup(String groupId) {
+        if (groupUserService.isAdmin(Main.curUser.getId(), groupId)) {
+            if (groupUserService.countAdmins(groupId) == 1) {
+                System.out.println("There is only 1 admin is you! Make someone admin then exit from group! ");
+                return;
+            }
+        }
+        groupUserService.deleteByMemberId(Main.curUser.getId(), groupId);
+
+        Message.success();
+    }
+
     private static void deleteGroup(String groupId) {
         groupService.deleteById(groupId);
 
@@ -193,7 +233,7 @@ public class GroupsView {
     private static void removeMember(String groupId) {
         while (true) {
             List<Users> members = groupUserService.getMembers(groupId);
-            showMembers(members);
+            showUsers(members);
 
             int index = Input.inputInt("Choose (0 - exit) : ") - 1;
 
@@ -203,7 +243,7 @@ public class GroupsView {
 
             if (index >= members.size()) {
                 Users user = members.get(index);
-                groupUserService.deleteByMemberId(user.getId());
+                groupUserService.deleteByMemberId(user.getId(), groupId);
                 Message.success();
             }
         }
@@ -220,7 +260,7 @@ public class GroupsView {
     private static void makeAdmin(String groupId) {
         while (true) {
             List<Users> members = groupUserService.getMembers(groupId);
-            showMembers(members);
+            showUsers(members);
 
             int index = Input.inputInt("Choose (0 - exit) : ") - 1;
 
@@ -236,7 +276,7 @@ public class GroupsView {
         }
     }
 
-    private static void showMembers(List<Users> members) {
+    private static void showUsers(List<Users> members) {
         int i = 1;
         System.out.println("Members : ");
         for (Users member : members) {
@@ -290,40 +330,42 @@ public class GroupsView {
         System.out.println("=======================");
     }
 
-    private static void displayMemberMenu() {
+    private static void displayGroupMenu(boolean admin) {
         System.out.println("""
                 1. Send message
                 2. Add member
-                                
-                0. Go back
+                3. Exit from group
                 """);
-    }
 
-    private static void displayAdminMenu() {
-        System.out.println("""
-                1. Send message
-                2. Add member
-                3. Make admin
-                4. Rename group
-                5. Remove member from group
-                6. Delete group
-                                
-                0. Go back
-                """);
+        if (admin) {
+            System.out.println("""
+                    4. Make admin
+                    5. Delete admin
+                    6. Rename group
+                    7. Remove member from group
+                    8. Delete group
+                    """);
+        }
+
+        System.out.println("\n 0. Go back");
     }
 
     private static void showGroupHistory(String groupId) {
         List<Messages> messagesOfGroup = messageService.getMessagesGroupOrChannel(groupId);
 
-        for (Messages message : messagesOfGroup) {
-            if (message.getUserId().equals(Main.curUser.getId())) {
-                System.out.println("\t".repeat(3) + message);
+        for (Messages messages : messagesOfGroup) {
+            if (messages.getUserId().equals(Main.curUser.getId())) {
+                if (messages.isRead()) {
+                    System.out.println("\t".repeat(6) + messages);
+                } else {
+                    System.out.println("\t".repeat(6) + messages + " 👀");
+                }
             } else {
-                System.out.println("from : " + userService.get(message.getUserId()));
-                System.out.println(message);
+                System.out.println(messages);
+                messages.setRead(true);
             }
         }
-        System.out.println("==================");
+        System.out.println("===========================");
     }
 
     private static String chooseGroup(List<Groups> groups) {

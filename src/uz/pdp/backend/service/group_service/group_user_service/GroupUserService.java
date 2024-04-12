@@ -13,7 +13,13 @@ public interface GroupUserService extends BaseService<GroupUsers> {
 
     List<Users> getMembers(String groupId);
 
-    void deleteByMemberId(String id);
+    void deleteByMemberId(String id, String groupId);
 
     void deleteAllMembers(String groupId);
+
+    int countAdmins(String groupId);
+
+    List<Users> getAdminsWithinMe(String id);
+
+    void deleteAdminStatus(String id, String groupId);
 }

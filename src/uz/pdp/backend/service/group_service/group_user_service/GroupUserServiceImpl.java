@@ -63,12 +63,27 @@ public class GroupUserServiceImpl implements GroupUserService {
     }
 
     @Override
-    public void deleteByMemberId(String id) {
+    public void deleteByMemberId(String id, String groupId) {
 
     }
 
     @Override
     public void deleteAllMembers(String groupId) {
 
+    }
+
+    @Override
+    public int countAdmins(String groupId) {
+        return 0;
+    }
+
+    @Override
+    public void deleteAdminStatus(String id, String groupId) {
+
+    }
+
+    @Override
+    public List<Users> getAdminsWithinMe(String userId) {
+        return null;
     }
 }

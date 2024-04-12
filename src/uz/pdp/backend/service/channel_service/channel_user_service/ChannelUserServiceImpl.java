@@ -46,4 +46,19 @@ public class ChannelUserServiceImpl implements ChannelUserService {
     public List<ChannelUsers> getList() {
         return channelUsers;
     }
+
+    @Override
+    public int countMembers() {
+        return 0;
+    }
+
+    @Override
+    public boolean isAdmin(String id, String channelId) {
+        return false;
+    }
+
+    @Override
+    public void deleteMember(String id, String channelId) {
+
+    }
 }
