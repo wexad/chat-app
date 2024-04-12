@@ -3,27 +3,33 @@ package uz.pdp.ui.views;
 import uz.pdp.backend.enums.Type;
 import uz.pdp.backend.model.channel.ChannelUsers;
 import uz.pdp.backend.model.channel.Channels;
-import uz.pdp.backend.model.message.Messages;
+import uz.pdp.backend.model.post.Posts;
 import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.channel_service.ChannelService;
 import uz.pdp.backend.service.channel_service.ChannelServiceImpl;
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserService;
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserServiceImpl;
-import uz.pdp.backend.service.message_service.MessageService;
-import uz.pdp.backend.service.message_service.MessageServiceImpl;
+import uz.pdp.backend.service.post_service.PostService;
+import uz.pdp.backend.service.post_service.PostServiceImpl;
+import uz.pdp.backend.service.user_service.UserService;
+import uz.pdp.backend.service.user_service.UserServiceImpl;
 import uz.pdp.ui.Main;
 import uz.pdp.ui.utils.Input;
 import uz.pdp.ui.utils.Message;
 
+import java.time.LocalTime;
 import java.util.List;
 
 public class ChannelsView {
 
     static ChannelService channelService = ChannelServiceImpl.getInstance();
 
-    static MessageService messageService = MessageServiceImpl.getInstance();
+    static UserService userService = UserServiceImpl.getInstance();
 
     static ChannelUserService channelUserService = ChannelUserServiceImpl.getInstance();
+
+    static PostService postService = PostServiceImpl.getInstance();
+
 
     public static void start() {
         Integer choice;
@@ -197,7 +203,24 @@ public class ChannelsView {
     }
 
     private static void sendMessage(String channelId) {
+        while (true) {
 
+            showPosts(channelId);
+
+            String text = Input.inputStr("Type to send message (0 - exit) : ");
+
+            if (text.equals("0")) {
+                return;
+            }
+
+            Posts post = new Posts(text, Main.curUser.getId(), channelId, 0, LocalTime.now());
+
+            postService.add(post);
+
+            Message.success();
+
+            System.out.println("Sent! ");
+        }
     }
 
     private static void exitFromChannel(String channelId) {
@@ -210,7 +233,7 @@ public class ChannelsView {
         while (true) {
             System.out.println(channelService.get(channelId));
 
-            showChannelHistory(channelId);
+            showPosts(channelId);
 
             String s = Input.inputStr("Press any button to exit");
 
@@ -220,22 +243,18 @@ public class ChannelsView {
         }
     }
 
-    private static void showChannelHistory(String channelId) {
-        List<Messages> messagesChannel = messageService.getMessagesGroupOrChannel(channelId);
-        for (Messages messages : messagesChannel) {
-            if (messages.getUserId().equals(Main.curUser.getId())) {
-                if (messages.isRead()) {
-                    System.out.println("\t".repeat(6) + messages);
-                } else {
-                    System.out.println("\t".repeat(6) + messages + " 👀");
-                }
+    private static void showPosts(String channelId) {
+        List<Posts> posts = postService.getPosts(channelId);
+
+        for (Posts post : posts) {
+            if (post.getUserId().equals(Main.curUser.getId())) {
+                System.out.println("\t".repeat(6) + post);
             } else {
-                System.out.println(messages);
-                messages.setRead(true);
+                System.out.println(post + " from : " + userService.get(post.getUserId()) + " views : " + post.getCountOfViews());
+                post.setCountOfViews(post.getCountOfViews() + 1);
             }
         }
-        System.out.println("===========================");
-
+        System.out.println("===================");
     }
 
     private static void displayChannelMenu(boolean admin) {
