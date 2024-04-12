@@ -46,4 +46,9 @@ public class PostServiceImpl implements PostService {
     public List<Posts> getList() {
         return posts;
     }
+
+    @Override
+    public List<Posts> getPosts(String channelId) {
+        return null;
+    }
 }
