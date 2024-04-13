@@ -128,6 +128,8 @@ public class ChannelsView {
 
                 if (i == 1) {
                     channelUserService.add(new ChannelUsers(Main.curUser.getId(), channelId, false));
+                } else {
+                    return;
                 }
             }
 
