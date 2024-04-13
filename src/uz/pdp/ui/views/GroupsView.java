@@ -9,6 +9,8 @@ import uz.pdp.backend.model.message.Messages;
 import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.contact_service.ContactService;
 import uz.pdp.backend.service.contact_service.ContactServiceImpl;
+import uz.pdp.backend.service.file_service.FileService;
+import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.group_service.GroupService;
 import uz.pdp.backend.service.group_service.GroupServiceImpl;
 import uz.pdp.backend.service.group_service.group_user_service.GroupUserService;
@@ -34,6 +36,8 @@ public class GroupsView {
     static GroupUserService groupUserService = GroupUserServiceImpl.getInstance();
 
     static ContactService contactService = ContactServiceImpl.getInstance();
+
+    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void start() {
         Integer choice;
@@ -66,7 +70,7 @@ public class GroupsView {
             return;
         }
 
-        if (!groupUserService.isMember(Main.curUser.getId(),groupId)) {
+        if (!groupUserService.isMember(Main.curUser.getId(), groupId)) {
             int i = Input.inputInt("Do you want to sign this group : 1 yes / 0 no");
 
             if (i == 1) {
@@ -77,6 +81,9 @@ public class GroupsView {
                 Message.success();
 
                 groupsMenu(groupId);
+
+                fileService.saveGroupUsers();
+
             }
         } else {
             groupsMenu(groupId);
@@ -105,6 +112,8 @@ public class GroupsView {
 
             groupService.add(new Groups(name, type));
             Message.success();
+
+            fileService.saveGroups();
         }
     }
 
@@ -214,6 +223,8 @@ public class GroupsView {
         if (index != -1 && index < admins.size()) {
             groupUserService.deleteAdminStatus(admins.get(index).getId(), groupId);
             Message.success();
+
+            fileService.saveGroupUsers();
         }
     }
 
@@ -227,11 +238,18 @@ public class GroupsView {
         groupUserService.deleteByMemberId(Main.curUser.getId(), groupId);
 
         Message.success();
+
+        fileService.saveGroupUsers();
     }
 
     private static void deleteGroup(String groupId) {
         groupService.deleteById(groupId);
+
+        fileService.saveGroups();
+
         groupUserService.deleteAllMembers(groupId);
+
+        fileService.saveGroupUsers();
     }
 
     private static void removeMember(String groupId) {
@@ -245,10 +263,12 @@ public class GroupsView {
                 return;
             }
 
-            if (index >= members.size()) {
+            if (index < members.size()) {
                 Users user = members.get(index);
                 groupUserService.deleteByMemberId(user.getId(), groupId);
                 Message.success();
+
+                fileService.saveGroupUsers();
             }
         }
     }
@@ -259,6 +279,8 @@ public class GroupsView {
         group.setName(Input.inputStr("Enter new name : " + group.getName() + " --> "));
 
         Message.success();
+
+        fileService.saveGroups();
     }
 
     private static void makeAdmin(String groupId) {
@@ -277,6 +299,8 @@ public class GroupsView {
             GroupUsers groupUsers = groupUserService.get(users.getId());
 
             groupUsers.setAdmin(true);
+
+            fileService.saveGroupUsers();
         }
     }
 
@@ -305,6 +329,8 @@ public class GroupsView {
             Message.success();
 
             System.out.println("Sent!");
+
+            fileService.saveMessages();
         }
     }
 
@@ -322,6 +348,8 @@ public class GroupsView {
 
             Contacts contact = contacts.get(index);
             groupUserService.add(new GroupUsers(contact.getContactId(), groupId, false));
+
+            fileService.saveGroupUsers();
         }
     }
 
@@ -367,6 +395,8 @@ public class GroupsView {
             } else {
                 System.out.println(messages);
                 messages.setRead(true);
+
+                fileService.saveMessages();
             }
         }
         System.out.println("===========================");

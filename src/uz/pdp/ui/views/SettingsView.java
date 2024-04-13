@@ -3,6 +3,8 @@ package uz.pdp.ui.views;
 import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserService;
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserServiceImpl;
+import uz.pdp.backend.service.file_service.FileService;
+import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.group_service.group_user_service.GroupUserService;
 import uz.pdp.backend.service.group_service.group_user_service.GroupUserServiceImpl;
 import uz.pdp.backend.service.user_service.UserService;
@@ -13,10 +15,9 @@ import uz.pdp.ui.utils.Input;
 public class SettingsView {
 
     static UserService userService = UserServiceImpl.getInstance();
-
     static GroupUserService groupUserService = GroupUserServiceImpl.getInstance();
-
     static ChannelUserService channelUserService = ChannelUserServiceImpl.getInstance();
+    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void start() {
         while (true) {
@@ -50,10 +51,13 @@ public class SettingsView {
 
             if (Main.curUser.getPassword().equals(password)) {
                 userService.deleteByUserId(Main.curUser.getId());
+                fileService.saveUsers();
 
                 groupUserService.deleteByUserId(Main.curUser.getId());
+                fileService.saveGroupUsers();
 
                 channelUserService.deleteByUserId(Main.curUser.getId());
+                fileService.saveChannelUsers();
 
                 System.out.println("Bye Bye :(");
 
@@ -71,6 +75,8 @@ public class SettingsView {
         }
 
         curUser.setPassword(password);
+
+        fileService.saveUsers();
     }
 
     private static void changeNickname() {
@@ -81,6 +87,8 @@ public class SettingsView {
         }
 
         curUser.setNickname(nickname);
+
+        fileService.saveUsers();
     }
 
     private static void changeName() {
@@ -91,6 +99,8 @@ public class SettingsView {
         }
 
         curUser.setName(name);
+
+        fileService.saveUsers();
     }
 
     private static void displaySettingsMenu() {

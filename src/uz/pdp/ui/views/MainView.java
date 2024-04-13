@@ -31,8 +31,7 @@ public class MainView {
                 2. Chats
                 3. Groups
                 4. Channels
-                5. Search
-                6. Settings
+                5. Settings
                                 
                 0. Log Out
                 """);
