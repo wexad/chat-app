@@ -16,7 +16,7 @@ public class ContactServiceImpl implements ContactService {
 
     public ContactServiceImpl() {
         this.contacts = new ArrayList<>();
-        fileService.loadContacts();
+//        fileService.loadContacts();
     }
 
     public static ContactService getInstance() {

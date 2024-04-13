@@ -21,7 +21,7 @@ public class GroupUserServiceImpl implements GroupUserService {
 
     public GroupUserServiceImpl() {
         this.groupUsers = new ArrayList<>();
-        fileService.loadGroupUsers();
+//        fileService.loadGroupUsers();
     }
 
     public static GroupUserService getInstance() {

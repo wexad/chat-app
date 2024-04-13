@@ -22,7 +22,7 @@ public class ChannelServiceImpl implements ChannelService {
 
     public ChannelServiceImpl() {
         this.channels = new ArrayList<>();
-        fileService.loadChannels();
+//        fileService.loadChannels();
     }
 
     public static ChannelService getInstance() {

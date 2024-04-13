@@ -20,7 +20,7 @@ public class GroupServiceImpl implements GroupService {
 
     public GroupServiceImpl() {
         this.groups = new ArrayList<>();
-        fileService.loadGroups();
+//        fileService.loadGroups();
     }
 
     public static GroupService getInstance() {

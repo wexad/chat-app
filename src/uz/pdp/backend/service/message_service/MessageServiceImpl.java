@@ -19,7 +19,7 @@ public class MessageServiceImpl implements MessageService {
 
     public MessageServiceImpl() {
         this.messages = new ArrayList<>();
-        fileService.loadMessages();
+//        fileService.loadMessages();
     }
 
     public static MessageService getInstance() {

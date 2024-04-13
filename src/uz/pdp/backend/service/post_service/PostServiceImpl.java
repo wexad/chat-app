@@ -15,7 +15,7 @@ public class PostServiceImpl implements PostService {
 
     public PostServiceImpl() {
         this.posts = new ArrayList<>();
-        fileService.loadPosts();
+//        fileService.loadPosts();
     }
 
     public static PostService getInstance() {

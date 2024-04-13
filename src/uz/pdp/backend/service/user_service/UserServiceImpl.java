@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
         users.add(new Users("c1", "c1", "c1", "c1", LocalTime.now()));
         users.add(new Users("d1", "d1", "d1", "d1", LocalTime.now()));
 
-        fileService.loadUsers();
+//        fileService.loadUsers();
     }
 
     public static UserService getInstance() {

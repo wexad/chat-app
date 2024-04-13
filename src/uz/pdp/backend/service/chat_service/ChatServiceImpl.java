@@ -16,7 +16,7 @@ public class ChatServiceImpl implements ChatService {
 
     public ChatServiceImpl() {
         this.chats = new ArrayList<>();
-        fileService.loadChats();
+//        fileService.loadChats();
     }
 
     public static ChatService getInstance() {
