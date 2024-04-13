@@ -3,6 +3,7 @@ package uz.pdp.ui.views;
 import uz.pdp.backend.enums.Type;
 import uz.pdp.backend.model.channel.ChannelUsers;
 import uz.pdp.backend.model.channel.Channels;
+import uz.pdp.backend.model.contact.Contacts;
 import uz.pdp.backend.model.group.GroupUsers;
 import uz.pdp.backend.model.post.Posts;
 import uz.pdp.backend.model.user.Users;
@@ -10,6 +11,8 @@ import uz.pdp.backend.service.channel_service.ChannelService;
 import uz.pdp.backend.service.channel_service.ChannelServiceImpl;
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserService;
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserServiceImpl;
+import uz.pdp.backend.service.contact_service.ContactService;
+import uz.pdp.backend.service.contact_service.ContactServiceImpl;
 import uz.pdp.backend.service.file_service.FileService;
 import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.post_service.PostService;
@@ -32,6 +35,8 @@ public class ChannelsView {
     static ChannelUserService channelUserService = ChannelUserServiceImpl.getInstance();
 
     static PostService postService = PostServiceImpl.getInstance();
+
+    static ContactService contactService = ContactServiceImpl.getInstance();
 
 //    static FileService fileService = FileServiceImpl.getInstance();
 
@@ -118,7 +123,15 @@ public class ChannelsView {
 
             String channelId = chooseChannel(channels);
 
-            channelUserService.isMember(Main.curUser.getId(), channelId);
+            if (channelUserService.isMember(Main.curUser.getId(), channelId)) {
+                Integer i = Input.inputInt("Do you want to subscribe to this channel ? 1 yes / other no");
+
+                if (i != 1) {
+                    return;
+                } else {
+                    channelUserService.add(new ChannelUsers(Main.curUser.getId(), channelId, false));
+                }
+            }
 
             if (channelId == null) {
                 return;
@@ -138,13 +151,15 @@ public class ChannelsView {
                 switch (choice) {
                     case 1 -> sendMessage(channelId);
 
-                    case 2 -> makeAdmin(channelId);
+                    case 2 -> addMember(channelId);
 
-                    case 3 -> deleteAdmin(channelId);
+                    case 3 -> makeAdmin(channelId);
 
-                    case 4 -> renameChannel(channelId);
+                    case 4 -> deleteAdmin(channelId);
 
-                    case 5 -> deleteChannel(channelId);
+                    case 5 -> renameChannel(channelId);
+
+                    case 6 -> deleteChannel(channelId);
                 }
             } else {
                 switch (choice) {
@@ -157,6 +172,35 @@ public class ChannelsView {
                 }
             }
         }
+    }
+
+    private static void addMember(String channelId) {
+        List<Contacts> contacts = contactService.getContacts(Main.curUser.getId());
+
+        showContacts(contacts);
+
+        int index = Input.inputInt("Choose (0 - exit): ") - 1;
+
+        if (index == -1 || index >= contacts.size()) {
+            return;
+        }
+
+        if (channelUserService.isMember(contacts.get(index).getContactId(), channelId)) {
+            System.out.println("He is already member of this channel! ");
+            return;
+        }
+
+        Contacts contact = contacts.get(index);
+        channelUserService.add(new ChannelUsers(contact.getContactId(), channelId, false));
+    }
+
+    private static void showContacts(List<Contacts> contacts) {
+        System.out.println("Contacts : ");
+        int i = 1;
+        for (Contacts contact : contacts) {
+            System.out.println(i++ + ". " + contact);
+        }
+        System.out.println("===================");
     }
 
     private static void deleteChannel(String channelId) {
@@ -295,10 +339,11 @@ public class ChannelsView {
         if (admin) {
             System.out.println("""
                     1. Send message
-                    2. Make admin
-                    3. Delete admin
-                    4. Rename channel
-                    5. Delete channel
+                    2. Add member
+                    3. Make admin
+                    4. Delete admin
+                    5. Rename channel
+                    6. Delete channel
                     """);
         } else {
             System.out.println("""
