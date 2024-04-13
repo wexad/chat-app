@@ -58,8 +58,6 @@ public class ChannelsView {
 
         List<Channels> channelsByWord = channelService.getChannelsByWord(search);
 
-        String s = Input.inputStr("Do you want to subscribe to this channel ? 1 yes / other no : ");
-
         channelMenu(channelsByWord);
     }
 
@@ -120,6 +118,7 @@ public class ChannelsView {
 
             String channelId = chooseChannel(channels);
 
+            channelUserService.isMember(Main.curUser.getId(), channelId);
 
             if (channelId == null) {
                 return;
