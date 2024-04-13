@@ -21,8 +21,7 @@ public class ChannelServiceImpl implements ChannelService {
     private List<Channels> channels;
 
     public ChannelServiceImpl() {
-        this.channels = new ArrayList<>();
-//        fileService.loadChannels();
+        this.channels =  fileService.loadChannels();
     }
 
     public static ChannelService getInstance() {

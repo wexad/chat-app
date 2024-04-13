@@ -1,8 +1,7 @@
 package uz.pdp.backend.service.file_service;
 
-import uz.pdp.backend.model.channel.ChannelUsers;
+import uz.pdp.backend.model.channel.Channels;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface FileService {
@@ -40,6 +39,6 @@ public interface FileService {
 
     void loadChats();
 
-    void loadChannels();
+    List<Channels> loadChannels();
 
 }

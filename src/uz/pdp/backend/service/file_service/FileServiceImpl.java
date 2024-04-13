@@ -29,12 +29,13 @@ import uz.pdp.backend.service.user_service.UserService;
 import uz.pdp.backend.service.user_service.UserServiceImpl;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FileServiceImpl implements FileService {
     static FileService fileService;
 
-    static UserService userService = UserServiceImpl.getInstance();
+    UserService userService = UserServiceImpl.getInstance();
     static ContactService contactService = ContactServiceImpl.getInstance();
     static ChatService chatService = ChatServiceImpl.getInstance();
     static MessageService messageService = MessageServiceImpl.getInstance();
@@ -266,15 +267,15 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void loadChannels() {
+    public List<Channels> loadChannels() {
         try (
                 InputStream inputStream = new FileInputStream("src/uz/pdp/db/channels/channels_db.txt");
                 ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
         ) {
-            List<Channels> list = channelService.getList();
-            list.addAll((List<Channels>) objectInputStream.readObject());
+            return(List<Channels>) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("(channels_.txt is empty)");
         }
+        return new ArrayList<>();
     }
 }
