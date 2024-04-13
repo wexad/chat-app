@@ -337,22 +337,24 @@ public class GroupsView {
     }
 
     private static void addMember(String groupId) {
-        while (true) {
-            List<Contacts> contacts = contactService.getContacts(Main.curUser.getId());
 
-            showContacts(contacts);
+        List<Contacts> contacts = contactService.getContacts(Main.curUser.getId());
 
-            int index = Input.inputInt("Choose (0 - exit): ") - 1;
+        showContacts(contacts);
 
-            if (index == -1 || index >= contacts.size()) {
-                return;
-            }
+        int index = Input.inputInt("Choose (0 - exit): ") - 1;
 
-            Contacts contact = contacts.get(index);
-            groupUserService.add(new GroupUsers(contact.getContactId(), groupId, false));
-
-//            fileService.saveGroupUsers();
+        if (index == -1 || index >= contacts.size()) {
+            return;
         }
+
+        if (groupUserService.isMember(contacts.get(index).getContactId(), groupId)) {
+            System.out.println("He is already member of this group! ");
+        }
+
+        Contacts contact = contacts.get(index);
+        groupUserService.add(new GroupUsers(contact.getContactId(), groupId, false));
+//            fileService.saveGroupUsers();
     }
 
     private static void showContacts(List<Contacts> contacts) {
