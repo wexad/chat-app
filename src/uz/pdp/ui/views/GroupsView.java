@@ -9,8 +9,6 @@ import uz.pdp.backend.model.message.Messages;
 import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.contact_service.ContactService;
 import uz.pdp.backend.service.contact_service.ContactServiceImpl;
-import uz.pdp.backend.service.file_service.FileService;
-import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.group_service.GroupService;
 import uz.pdp.backend.service.group_service.GroupServiceImpl;
 import uz.pdp.backend.service.group_service.group_user_service.GroupUserService;
@@ -256,7 +254,7 @@ public class GroupsView {
 
     private static void removeMember(String groupId) {
         while (true) {
-            List<Users> members = groupUserService.getMembers(groupId);
+            List<Users> members = groupUserService.getMembers(groupId, Main.curUser.getId());
             showUsers(members);
 
             int index = Input.inputInt("Choose (0 - exit) : ") - 1;
@@ -287,7 +285,7 @@ public class GroupsView {
 
     private static void makeAdmin(String groupId) {
         while (true) {
-            List<Users> members = groupUserService.getMembers(groupId);
+            List<Users> members = groupUserService.getMembers(groupId, Main.curUser.getId());
             showUsers(members);
 
             int index = Input.inputInt("Choose (0 - exit) : ") - 1;

@@ -74,10 +74,10 @@ public class GroupUserServiceImpl implements GroupUserService {
     }
 
     @Override
-    public List<Users> getMembers(String groupId) {
+    public List<Users> getMembers(String groupId, String userId) {
         List<Users> users = new ArrayList<>();
         for (GroupUsers groupUser : groupUsers) {
-            if (groupUser.getGroupId().equals(groupId)) {
+            if (groupUser.getGroupId().equals(groupId) && !groupUser.getUserId().equals(userId)) {
                 users.add(userService.get(groupUser.getUserId()));
             }
         }
@@ -86,20 +86,12 @@ public class GroupUserServiceImpl implements GroupUserService {
 
     @Override
     public void deleteByMemberId(String userId, String groupId) {
-        for (GroupUsers groupUser : groupUsers) {
-            if (groupUser.getGroupId().equals(groupId) && groupUser.getUserId().equals(userId)) {
-                groupUsers.remove(groupUser);
-            }
-        }
+        groupUsers.removeIf(groupUsers1 -> groupUsers1.getUserId().equals(userId) && groupUsers1.getGroupId().equals(groupId));
     }
 
     @Override
     public void deleteAllMembers(String groupId) {
-        for (GroupUsers groupUser : groupUsers) {
-            if (groupUser.getGroupId().equals(groupId)) {
-                groupUsers.remove(groupUser);
-            }
-        }
+        groupUsers.removeIf(groupUsers1 -> groupUsers1.getGroupId().equals(groupId));
     }
 
     @Override

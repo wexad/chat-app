@@ -11,7 +11,7 @@ public interface GroupUserService extends BaseService<GroupUsers> {
 
     boolean isAdmin(String userId, String groupId);
 
-    List<Users> getMembers(String groupId);
+    List<Users> getMembers(String groupId, String userId);
 
     void deleteByMemberId(String userId, String groupId);
 
