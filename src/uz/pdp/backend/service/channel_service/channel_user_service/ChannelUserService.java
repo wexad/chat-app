@@ -23,5 +23,5 @@ public interface ChannelUserService extends BaseService<ChannelUsers> {
 
     void deleteByUserId(String userId);
 
-    boolean isMember(String id, String channelId);
+    boolean isMember(String userId, String channelId);
 }

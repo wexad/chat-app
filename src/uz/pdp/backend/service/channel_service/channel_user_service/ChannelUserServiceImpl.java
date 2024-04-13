@@ -125,4 +125,14 @@ public class ChannelUserServiceImpl implements ChannelUserService {
     public void deleteByUserId(String userId) {
         channelUsers.removeIf(channelUsers1 -> channelUsers1.getUserId().equals(userId));
     }
+
+    @Override
+    public boolean isMember(String userId, String channelId) {
+        for (ChannelUsers channelUser : channelUsers) {
+            if (channelUser.getUserId().equals(userId) && channelUser.getChannelId().equals(channelId)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
