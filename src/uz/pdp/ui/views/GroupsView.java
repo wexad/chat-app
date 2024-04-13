@@ -102,7 +102,7 @@ public class GroupsView {
         } else {
             Type type = chooseType();
             while (type == null) {
-                System.out.println("There is not unique name ! Do you want try again ? 1 yes / 0 no");
+                System.out.println("There is wrong type ! Do you want try again ? 1 yes / 0 no");
                 if (Input.inputInt("Choice : ") != 1) {
                     return;
                 }
@@ -123,7 +123,7 @@ public class GroupsView {
                 2. Public
                 """);
 
-        int type = Input.inputInt("Chose : ");
+        int type = Input.inputInt("Choose : ") - 1;
 
         Type[] types = Type.values();
 
