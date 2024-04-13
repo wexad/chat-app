@@ -27,4 +27,6 @@ public interface GroupUserService extends BaseService<GroupUsers> {
     int countAdmins(String groupId);
 
     void deleteByUserId(String userId);
+
+    GroupUsers getByUserId(String userId);
 }

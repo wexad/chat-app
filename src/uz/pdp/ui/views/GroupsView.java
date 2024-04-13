@@ -298,10 +298,9 @@ public class GroupsView {
 
         Users users = members.get(index);
 
-        GroupUsers groupUsers = groupUserService.get(users.getId());
-
+        GroupUsers groupUsers = groupUserService.getByUserId(users.getId());
         groupUsers.setAdmin(true);
-
+        Message.success();
             fileService.saveGroupUsers();
     }
 
