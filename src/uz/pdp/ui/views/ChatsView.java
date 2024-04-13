@@ -160,10 +160,11 @@ public class ChatsView {
                 secondUser = userService.get(chat.getFirstUserId());
             }
             Contacts contact = contactService.getContact(Main.curUser.getId(), secondUser.getId());
+            String last = secondUser.getLastActivity().getHour() + " : " + secondUser.getLastActivity().getMinute();
             if (contact != null) {
-                System.out.println(i++ + contact.getName() + " | last activity : " + secondUser.getLastActivity() + " | " + messageService.countNotReadMessages(secondUser.getId(), Main.curUser.getId()));
+                System.out.println(i++ + ". " + contact.getName() + " " + last + " ( " + messageService.countNotReadMessages(secondUser.getId(), Main.curUser.getId()) + " ) ");
             } else {
-                System.out.println(i++ + secondUser.toString() + " | last activity : " + secondUser.getLastActivity() + " | " + messageService.countNotReadMessages(secondUser.getId(), Main.curUser.getId()));
+                System.out.println(i++ + ". " + secondUser + " " + last + " ( " + messageService.countNotReadMessages(secondUser.getId(), Main.curUser.getId()) + " ) ");
             }
         }
         System.out.println("==========================");
