@@ -3,6 +3,7 @@ package uz.pdp.ui.views;
 import uz.pdp.backend.enums.Type;
 import uz.pdp.backend.model.channel.ChannelUsers;
 import uz.pdp.backend.model.channel.Channels;
+import uz.pdp.backend.model.group.GroupUsers;
 import uz.pdp.backend.model.post.Posts;
 import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.channel_service.ChannelService;
@@ -265,7 +266,7 @@ public class ChannelsView {
 
             showPosts(channelId);
 
-            String s = Input.inputStr("Press any button to exit");
+            String s = Input.inputStr("Press any button to exit : ");
 
             if (s != null) {
                 return;
