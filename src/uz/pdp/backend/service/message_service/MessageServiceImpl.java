@@ -3,6 +3,8 @@ package uz.pdp.backend.service.message_service;
 import uz.pdp.backend.enums.MessageType;
 import uz.pdp.backend.model.chat.Chats;
 import uz.pdp.backend.model.message.Messages;
+import uz.pdp.backend.service.file_service.FileService;
+import uz.pdp.backend.service.file_service.FileServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +13,13 @@ public class MessageServiceImpl implements MessageService {
 
     private static MessageService messageService;
 
+    static FileService fileService = FileServiceImpl.getInstance();
+
     private List<Messages> messages;
 
     public MessageServiceImpl() {
         this.messages = new ArrayList<>();
+        fileService.loadMessages();
     }
 
     public static MessageService getInstance() {

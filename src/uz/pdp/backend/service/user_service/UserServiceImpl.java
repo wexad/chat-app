@@ -2,6 +2,8 @@ package uz.pdp.backend.service.user_service;
 
 import uz.pdp.backend.dto.LoginDTO;
 import uz.pdp.backend.model.user.Users;
+import uz.pdp.backend.service.file_service.FileService;
+import uz.pdp.backend.service.file_service.FileServiceImpl;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -9,23 +11,25 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
-
-
     private static UserService userService;
 
     private List<Users> users;
 
+    static FileService fileService = FileServiceImpl.getInstance();
+
     public UserServiceImpl() {
         this.users = new ArrayList<>();
-        users.add(new Users("a","a","a","a",LocalTime.now()));
-        users.add(new Users("b","b","b","b",LocalTime.now()));
-        users.add(new Users("c","c","c","c",LocalTime.now()));
-        users.add(new Users("d","d","d","d",LocalTime.now()));
+        users.add(new Users("a", "a", "a", "a", LocalTime.now()));
+        users.add(new Users("b", "b", "b", "b", LocalTime.now()));
+        users.add(new Users("c", "c", "c", "c", LocalTime.now()));
+        users.add(new Users("d", "d", "d", "d", LocalTime.now()));
 
-        users.add(new Users("a1","a1","a1","a1",LocalTime.now()));
-        users.add(new Users("b1","b1","b1","b1",LocalTime.now()));
-        users.add(new Users("c1","c1","c1","c1",LocalTime.now()));
-        users.add(new Users("d1","d1","d1","d1",LocalTime.now()));
+        users.add(new Users("a1", "a1", "a1", "a1", LocalTime.now()));
+        users.add(new Users("b1", "b1", "b1", "b1", LocalTime.now()));
+        users.add(new Users("c1", "c1", "c1", "c1", LocalTime.now()));
+        users.add(new Users("d1", "d1", "d1", "d1", LocalTime.now()));
+
+        fileService.loadUsers();
     }
 
     public static UserService getInstance() {

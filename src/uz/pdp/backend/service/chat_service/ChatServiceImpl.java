@@ -1,6 +1,8 @@
 package uz.pdp.backend.service.chat_service;
 
 import uz.pdp.backend.model.chat.Chats;
+import uz.pdp.backend.service.file_service.FileService;
+import uz.pdp.backend.service.file_service.FileServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +11,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class ChatServiceImpl implements ChatService {
 
     private static ChatService chatService;
-
+    static FileService fileService = FileServiceImpl.getInstance();
     private List<Chats> chats;
 
     public ChatServiceImpl() {
         this.chats = new ArrayList<>();
+        fileService.loadChats();
     }
 
     public static ChatService getInstance() {

@@ -1,6 +1,8 @@
 package uz.pdp.backend.service.post_service;
 
 import uz.pdp.backend.model.post.Posts;
+import uz.pdp.backend.service.file_service.FileService;
+import uz.pdp.backend.service.file_service.FileServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +10,12 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
 
     private static PostService postService;
-
+    static FileService fileService = FileServiceImpl.getInstance();
     private List<Posts> posts;
 
     public PostServiceImpl() {
         this.posts = new ArrayList<>();
+        fileService.loadPosts();
     }
 
     public static PostService getInstance() {

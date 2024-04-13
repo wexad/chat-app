@@ -25,4 +25,21 @@ public interface FileService {
     void savePosts();
 
     void loadChannelUsers();
+
+    void loadUsers();
+
+    void loadGroupUsers();
+
+    void loadGroups();
+
+    void loadMessages();
+
+    void loadPosts();
+
+    void loadContacts();
+
+    void loadChats();
+
+    void loadChannels();
+
 }

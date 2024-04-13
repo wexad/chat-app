@@ -9,6 +9,8 @@ import uz.pdp.backend.service.chat_service.ChatService;
 import uz.pdp.backend.service.chat_service.ChatServiceImpl;
 import uz.pdp.backend.service.contact_service.ContactService;
 import uz.pdp.backend.service.contact_service.ContactServiceImpl;
+import uz.pdp.backend.service.file_service.FileService;
+import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.group_service.GroupService;
 import uz.pdp.backend.service.group_service.GroupServiceImpl;
 import uz.pdp.backend.service.group_service.group_user_service.GroupUserService;
@@ -29,6 +31,7 @@ import static uz.pdp.ui.views.LoginView.registerUser;
 
 public class Main {
 
+    static FileService fileService = FileServiceImpl.getInstance();
     static UserService userService = UserServiceImpl.getInstance();
     static MessageService messageService = MessageServiceImpl.getInstance();
     static ContactService contactService = ContactServiceImpl.getInstance();
