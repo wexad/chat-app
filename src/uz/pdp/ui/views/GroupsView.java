@@ -284,24 +284,23 @@ public class GroupsView {
     }
 
     private static void makeAdmin(String groupId) {
-        while (true) {
-            List<Users> members = groupUserService.getMembers(groupId, Main.curUser.getId());
-            showUsers(members);
 
-            int index = Input.inputInt("Choose (0 - exit) : ") - 1;
+        List<Users> members = groupUserService.getMembers(groupId, Main.curUser.getId());
+        showUsers(members);
 
-            if (index == -1 || index >= members.size()) {
-                return;
-            }
+        int index = Input.inputInt("Choose (0 - exit) : ") - 1;
 
-            Users users = members.get(index);
+        if (index == -1 || index >= members.size()) {
+            return;
+        }
 
-            GroupUsers groupUsers = groupUserService.get(users.getId());
+        Users users = members.get(index);
 
-            groupUsers.setAdmin(true);
+        GroupUsers groupUsers = groupUserService.get(users.getId());
+
+        groupUsers.setAdmin(true);
 
 //            fileService.saveGroupUsers();
-        }
     }
 
     private static void showUsers(List<Users> members) {
