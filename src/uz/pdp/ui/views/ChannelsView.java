@@ -287,6 +287,11 @@ public class ChannelsView {
     private static void deleteAdmin(String channelId) {
         List<Users> admins = channelUserService.getAdmins(channelId);
 
+        if (admins.isEmpty()) {
+            Message.noData();
+            System.out.println("There is only 1 admin is you! ");
+        }
+
         showUsers(admins);
 
         int index = Input.inputInt("Choose (0 - cancel) : ") - 1;
