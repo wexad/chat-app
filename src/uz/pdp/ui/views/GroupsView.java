@@ -390,6 +390,7 @@ public class GroupsView {
         List<Messages> messagesOfGroup = messageService.getMessagesGroupOrChannel(groupId);
 
         for (Messages messages : messagesOfGroup) {
+            System.out.println("\t".repeat(3) + groupService.get(groupId));
             if (messages.getUserId().equals(Main.curUser.getId())) {
                 if (messages.isRead()) {
                     System.out.println("\t".repeat(6) + messages);
@@ -397,6 +398,12 @@ public class GroupsView {
                     System.out.println("\t".repeat(6) + messages + " 👀");
                 }
             } else {
+                Contacts contact = contactService.getContact(Main.curUser.getId(), messages.getUserId());
+                if (contact != null) {
+                    System.out.println("from : " + contact.getName());
+                } else {
+                    System.out.println("from : " + userService.get(messages.getUserId()));
+                }
                 System.out.println(messages);
                 messages.setRead(true);
 
