@@ -124,11 +124,9 @@ public class ChannelsView {
             String channelId = chooseChannel(channels);
 
             if (!channelUserService.isMember(Main.curUser.getId(), channelId)) {
-                Integer i = Input.inputInt("Do you want to subscribe to this channel ? 1 yes / other no");
+                int i = Input.inputInt("Do you want to subscribe to this channel ? 1 yes / other no");
 
-                if (i != 1) {
-                    return;
-                } else {
+                if (i == 1) {
                     channelUserService.add(new ChannelUsers(Main.curUser.getId(), channelId, false));
                 }
             }

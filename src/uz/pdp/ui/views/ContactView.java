@@ -19,7 +19,7 @@ public class ContactView {
     static ContactService contactService = ContactServiceImpl.getInstance();
     static ChatService chatService = ChatServiceImpl.getInstance();
 
-//    static FileService fileService = FileServiceImpl.getInstance();
+    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void addContact() {
         String number = Input.inputStr("Enter number : ");

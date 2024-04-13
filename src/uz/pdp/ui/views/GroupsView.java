@@ -9,6 +9,8 @@ import uz.pdp.backend.model.message.Messages;
 import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.contact_service.ContactService;
 import uz.pdp.backend.service.contact_service.ContactServiceImpl;
+import uz.pdp.backend.service.file_service.FileService;
+import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.group_service.GroupService;
 import uz.pdp.backend.service.group_service.GroupServiceImpl;
 import uz.pdp.backend.service.group_service.group_user_service.GroupUserService;
@@ -35,7 +37,7 @@ public class GroupsView {
 
     static ContactService contactService = ContactServiceImpl.getInstance();
 
-//    static FileService fileService = FileServiceImpl.getInstance();
+    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void start() {
         Integer choice;
@@ -80,7 +82,7 @@ public class GroupsView {
 
                 groupsMenu(groupId);
 
-//                fileService.saveGroupUsers();
+                fileService.saveGroupUsers();
 
             }
         } else {
@@ -113,7 +115,7 @@ public class GroupsView {
             groupUserService.add(new GroupUsers(Main.curUser.getId(), groups.getId(), true));
             Message.success();
 
-//            fileService.saveGroups();
+            fileService.saveGroups();
         }
     }
 
@@ -224,7 +226,7 @@ public class GroupsView {
             groupUserService.deleteAdminStatus(admins.get(index).getId(), groupId);
             Message.success();
 
-//            fileService.saveGroupUsers();
+            fileService.saveGroupUsers();
         }
     }
 
@@ -239,17 +241,17 @@ public class GroupsView {
 
         Message.success();
 
-//        fileService.saveGroupUsers();
+        fileService.saveGroupUsers();
     }
 
     private static void deleteGroup(String groupId) {
         groupService.deleteById(groupId);
 
-//        fileService.saveGroups();
+        fileService.saveGroups();
 
         groupUserService.deleteAllMembers(groupId);
 
-//        fileService.saveGroupUsers();
+        fileService.saveGroupUsers();
     }
 
     private static void removeMember(String groupId) {
@@ -268,7 +270,7 @@ public class GroupsView {
                 groupUserService.deleteByMemberId(user.getId(), groupId);
                 Message.success();
 
-//                fileService.saveGroupUsers();
+                fileService.saveGroupUsers();
             }
         }
     }
@@ -280,7 +282,7 @@ public class GroupsView {
 
         Message.success();
 
-//        fileService.saveGroups();
+        fileService.saveGroups();
     }
 
     private static void makeAdmin(String groupId) {
@@ -300,7 +302,7 @@ public class GroupsView {
 
         groupUsers.setAdmin(true);
 
-//            fileService.saveGroupUsers();
+            fileService.saveGroupUsers();
     }
 
     private static void showUsers(List<Users> members) {
@@ -329,7 +331,7 @@ public class GroupsView {
 
             System.out.println("Sent!");
 
-//            fileService.saveMessages();
+            fileService.saveMessages();
         }
     }
 
@@ -352,7 +354,7 @@ public class GroupsView {
 
         Contacts contact = contacts.get(index);
         groupUserService.add(new GroupUsers(contact.getContactId(), groupId, false));
-//            fileService.saveGroupUsers();
+            fileService.saveGroupUsers();
     }
 
     private static void showContacts(List<Contacts> contacts) {
