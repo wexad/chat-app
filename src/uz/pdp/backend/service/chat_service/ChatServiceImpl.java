@@ -4,6 +4,7 @@ import uz.pdp.backend.model.chat.Chats;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ChatServiceImpl implements ChatService {
 
@@ -78,5 +79,10 @@ public class ChatServiceImpl implements ChatService {
             }
         }
         return false;
+    }
+
+    @Override
+    public void deleteByUserId(String id) {
+        chats.removeIf(chat -> chat.getFirstUserId().equals(id) || chat.getSecondUserId().equals(id));
     }
 }

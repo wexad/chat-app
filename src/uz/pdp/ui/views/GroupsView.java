@@ -161,9 +161,9 @@ public class GroupsView {
             displayGroupMenu(admin);
 
             switch (Input.inputInt("Choice : ")) {
-                case 1 -> addMember(groupId);
+                case 1 -> sendMessageToGroup(groupId);
 
-                case 2 -> sendMessageToGroup(groupId);
+                case 2 -> addMember(groupId);
 
                 case 3 -> {
                     exitFromGroup(groupId);

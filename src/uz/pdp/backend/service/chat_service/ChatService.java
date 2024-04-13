@@ -9,4 +9,7 @@ public interface ChatService extends BaseService<Chats> {
     List<Chats> getChatsOfUser(String userId);
     Chats getChatOfUser(String userId);
     boolean isExist(String userId);
+
+    void deleteByUserId(String id);
+
 }

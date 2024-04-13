@@ -3,6 +3,8 @@ package uz.pdp.ui.views;
 import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserService;
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserServiceImpl;
+import uz.pdp.backend.service.chat_service.ChatService;
+import uz.pdp.backend.service.chat_service.ChatServiceImpl;
 import uz.pdp.backend.service.file_service.FileService;
 import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.group_service.group_user_service.GroupUserService;
@@ -17,6 +19,7 @@ public class SettingsView {
     static UserService userService = UserServiceImpl.getInstance();
     static GroupUserService groupUserService = GroupUserServiceImpl.getInstance();
     static ChannelUserService channelUserService = ChannelUserServiceImpl.getInstance();
+    static ChatService chatService = ChatServiceImpl.getInstance();
 //    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void start() {
@@ -52,6 +55,8 @@ public class SettingsView {
             if (Main.curUser.getPassword().equals(password)) {
                 userService.deleteByUserId(Main.curUser.getId());
 //                fileService.saveUsers();
+
+                chatService.deleteByUserId(Main.curUser.getId());
 
                 groupUserService.deleteByUserId(Main.curUser.getId());
 //                fileService.saveGroupUsers();
