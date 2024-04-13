@@ -66,7 +66,7 @@ public class GroupUserServiceImpl implements GroupUserService {
     @Override
     public boolean isAdmin(String userId, String groupId) {
         for (GroupUsers groupUser : groupUsers) {
-            if (groupUser.getUserId().equals(userId) && groupUser.getGroupId().equals(groupId)) {
+            if (groupUser.getUserId().equals(userId) && groupUser.getGroupId().equals(groupId) && groupUser.isAdmin()) {
                 return true;
             }
         }

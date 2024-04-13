@@ -372,7 +372,7 @@ public class GroupsView {
                 """);
 
         if (admin) {
-            System.out.println("""
+            System.out.print("""
                     4. Make admin
                     5. Delete admin
                     6. Rename group
@@ -381,7 +381,7 @@ public class GroupsView {
                     """);
         }
 
-        System.out.println("\n 0. Go back");
+        System.out.println("\n0. Go back");
     }
 
     private static void showGroupHistory(String groupId) {
