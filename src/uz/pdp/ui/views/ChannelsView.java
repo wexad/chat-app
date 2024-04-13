@@ -4,7 +4,6 @@ import uz.pdp.backend.enums.Type;
 import uz.pdp.backend.model.channel.ChannelUsers;
 import uz.pdp.backend.model.channel.Channels;
 import uz.pdp.backend.model.contact.Contacts;
-import uz.pdp.backend.model.group.GroupUsers;
 import uz.pdp.backend.model.post.Posts;
 import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.channel_service.ChannelService;
@@ -63,7 +62,68 @@ public class ChannelsView {
 
         List<Channels> channelsByWord = channelService.getChannelsByWord(search);
 
-        channelMenu(channelsByWord);
+        checkSub(channelsByWord);
+
+    }
+
+    private static void checkSub(List<Channels> channelsByWord) {
+        if (channelsByWord.isEmpty()) {
+            Message.noData();
+            return;
+        }
+
+        String channelId = chooseChannel(channelsByWord);
+
+        if (!channelUserService.isMember(Main.curUser.getId(), channelId)) {
+            int i = Input.inputInt("Do you want to subscribe to this channel ? 1 yes / other no");
+
+            if (i == 1) {
+                channelUserService.add(new ChannelUsers(Main.curUser.getId(), channelId, false));
+            } else {
+                return;
+            }
+        }
+
+        channelMenuForSearch(channelId);
+    }
+
+    private static void channelMenuForSearch(String channelId) {
+        while (true) {
+            boolean admin = channelUserService.isAdmin(Main.curUser.getId(), channelId);
+
+            displayChannelMenu(admin);
+
+            int choice = Input.inputInt("Choose : ");
+
+            if (choice == 0) {
+                return;
+            }
+
+            if (admin) {
+                switch (choice) {
+                    case 1 -> sendMessage(channelId);
+
+                    case 2 -> addMember(channelId);
+
+                    case 3 -> makeAdmin(channelId);
+
+                    case 4 -> deleteAdmin(channelId);
+
+                    case 5 -> renameChannel(channelId);
+
+                    case 6 -> deleteChannel(channelId);
+                }
+            } else {
+                switch (choice) {
+                    case 1 -> checkChannel(channelId);
+
+                    case 2 -> {
+                        exitFromChannel(channelId);
+                        return;
+                    }
+                }
+            }
+        }
     }
 
     private static void createChannel() {
@@ -123,15 +183,6 @@ public class ChannelsView {
 
             String channelId = chooseChannel(channels);
 
-            if (!channelUserService.isMember(Main.curUser.getId(), channelId)) {
-                int i = Input.inputInt("Do you want to subscribe to this channel ? 1 yes / other no");
-
-                if (i == 1) {
-                    channelUserService.add(new ChannelUsers(Main.curUser.getId(), channelId, false));
-                } else {
-                    return;
-                }
-            }
 
             if (channelId == null) {
                 return;

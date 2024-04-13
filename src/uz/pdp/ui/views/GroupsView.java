@@ -407,7 +407,7 @@ public class GroupsView {
                 System.out.println(messages);
                 messages.setRead(true);
 
-//                fileService.saveMessages();
+                fileService.saveMessages();
             }
         }
         System.out.println("===========================");

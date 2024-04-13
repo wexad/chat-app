@@ -53,9 +53,9 @@ public class ContactView {
                 System.out.println("New contact created successfully! ");
                 if (chatService.getChatOfUser(Main.curUser.getId()) == null) {
                     chatService.add(new Chats(Main.curUser.getId(), contactId));
-//                    fileService.saveChats();
+                    fileService.saveChats();
                 }
-//                fileService.saveContacts();
+                fileService.saveContacts();
             }
         }
 
