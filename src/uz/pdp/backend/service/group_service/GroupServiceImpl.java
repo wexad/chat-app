@@ -3,8 +3,6 @@ package uz.pdp.backend.service.group_service;
 import uz.pdp.backend.enums.Type;
 import uz.pdp.backend.model.group.GroupUsers;
 import uz.pdp.backend.model.group.Groups;
-import uz.pdp.backend.service.file_service.FileService;
-import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.group_service.group_user_service.GroupUserService;
 import uz.pdp.backend.service.group_service.group_user_service.GroupUserServiceImpl;
 
@@ -13,14 +11,12 @@ import java.util.List;
 
 public class GroupServiceImpl implements GroupService {
     static GroupUserService groupUserService = GroupUserServiceImpl.getInstance();
-    static FileService fileService = FileServiceImpl.getInstance();
     private static GroupService groupService;
 
     private List<Groups> groups;
 
     public GroupServiceImpl() {
         this.groups = new ArrayList<>();
-//        fileService.loadGroups();
     }
 
     public static GroupService getInstance() {

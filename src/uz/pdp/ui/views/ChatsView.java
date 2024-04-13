@@ -9,8 +9,6 @@ import uz.pdp.backend.service.chat_service.ChatService;
 import uz.pdp.backend.service.chat_service.ChatServiceImpl;
 import uz.pdp.backend.service.contact_service.ContactService;
 import uz.pdp.backend.service.contact_service.ContactServiceImpl;
-import uz.pdp.backend.service.file_service.FileService;
-import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.message_service.MessageService;
 import uz.pdp.backend.service.message_service.MessageServiceImpl;
 import uz.pdp.backend.service.user_service.UserService;
@@ -28,7 +26,6 @@ public class ChatsView {
     static UserService userService = UserServiceImpl.getInstance();
     static MessageService messageService = MessageServiceImpl.getInstance();
     static ContactService contactService = ContactServiceImpl.getInstance();
-    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void start() {
         Integer choice;
@@ -63,7 +60,6 @@ public class ChatsView {
         if (index < usersByWord.size()) {
             if (!chatService.isExist(usersByWord.get(index).getId())) {
                 chatService.add(new Chats(Main.curUser.getId(), usersByWord.get(index).getId()));
-                fileService.saveChats();
 
             }
             sendMessageToChat(chatService.getChatOfUser(Main.curUser.getId()));
@@ -135,7 +131,6 @@ public class ChatsView {
             Message.success();
             System.out.println("Sent!");
 
-            fileService.saveMessages();
         }
     }
 
@@ -153,7 +148,6 @@ public class ChatsView {
             } else {
                 System.out.println(messages);
                 messages.setRead(true);
-                fileService.saveMessages();
             }
         }
         System.out.println("===========================");

@@ -3,11 +3,8 @@ package uz.pdp.backend.service.channel_service;
 import uz.pdp.backend.enums.Type;
 import uz.pdp.backend.model.channel.ChannelUsers;
 import uz.pdp.backend.model.channel.Channels;
-import uz.pdp.backend.model.user.Users;
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserService;
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserServiceImpl;
-import uz.pdp.backend.service.file_service.FileService;
-import uz.pdp.backend.service.file_service.FileServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +14,10 @@ public class ChannelServiceImpl implements ChannelService {
 
     private static ChannelService channelService;
 
-    static FileService fileService = FileServiceImpl.getInstance();
     private List<Channels> channels;
 
     public ChannelServiceImpl() {
-        this.channels =  fileService.loadChannels();
+        this.channels = new ArrayList<>();
     }
 
     public static ChannelService getInstance() {

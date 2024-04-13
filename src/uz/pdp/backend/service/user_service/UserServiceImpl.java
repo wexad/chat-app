@@ -2,8 +2,6 @@ package uz.pdp.backend.service.user_service;
 
 import uz.pdp.backend.dto.LoginDTO;
 import uz.pdp.backend.model.user.Users;
-import uz.pdp.backend.service.file_service.FileService;
-import uz.pdp.backend.service.file_service.FileServiceImpl;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -15,7 +13,6 @@ public class UserServiceImpl implements UserService {
 
     private List<Users> users;
 
-    FileService fileService = FileServiceImpl.getInstance();
 
     public UserServiceImpl() {
         this.users = new ArrayList<>();
@@ -28,8 +25,6 @@ public class UserServiceImpl implements UserService {
         users.add(new Users("b1", "b1", "b1", "b1", LocalTime.now()));
         users.add(new Users("c1", "c1", "c1", "c1", LocalTime.now()));
         users.add(new Users("d1", "d1", "d1", "d1", LocalTime.now()));
-
-        fileService.loadUsers();
     }
 
     public static UserService getInstance() {

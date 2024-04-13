@@ -6,8 +6,6 @@ import uz.pdp.backend.service.chat_service.ChatService;
 import uz.pdp.backend.service.chat_service.ChatServiceImpl;
 import uz.pdp.backend.service.contact_service.ContactService;
 import uz.pdp.backend.service.contact_service.ContactServiceImpl;
-import uz.pdp.backend.service.file_service.FileService;
-import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.user_service.UserService;
 import uz.pdp.backend.service.user_service.UserServiceImpl;
 import uz.pdp.ui.Main;
@@ -19,7 +17,6 @@ public class ContactView {
     static ContactService contactService = ContactServiceImpl.getInstance();
     static ChatService chatService = ChatServiceImpl.getInstance();
 
-    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void addContact() {
         String number = Input.inputStr("Enter number : ");
@@ -53,9 +50,8 @@ public class ContactView {
                 System.out.println("New contact created successfully! ");
                 if (chatService.getChatOfUser(Main.curUser.getId()) == null) {
                     chatService.add(new Chats(Main.curUser.getId(), contactId));
-                    fileService.saveChats();
+
                 }
-                fileService.saveContacts();
             }
         }
 

@@ -12,8 +12,6 @@ import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserSe
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserServiceImpl;
 import uz.pdp.backend.service.contact_service.ContactService;
 import uz.pdp.backend.service.contact_service.ContactServiceImpl;
-import uz.pdp.backend.service.file_service.FileService;
-import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.post_service.PostService;
 import uz.pdp.backend.service.post_service.PostServiceImpl;
 import uz.pdp.backend.service.user_service.UserService;
@@ -37,7 +35,6 @@ public class ChannelsView {
 
     static ContactService contactService = ContactServiceImpl.getInstance();
 
-    static FileService fileService = FileServiceImpl.getInstance();
 
 
     public static void start() {
@@ -154,7 +151,6 @@ public class ChannelsView {
             channelUserService.add(new ChannelUsers(Main.curUser.getId(), channel.getId(), true));
             Message.success();
 
-            fileService.saveChannels();
         }
     }
 
@@ -244,7 +240,6 @@ public class ChannelsView {
         Contacts contact = contacts.get(index);
         channelUserService.add(new ChannelUsers(contact.getContactId(), channelId, false));
 
-        fileService.saveChannelUsers();
     }
 
     private static void showContacts(List<Contacts> contacts) {
@@ -259,11 +254,7 @@ public class ChannelsView {
     private static void deleteChannel(String channelId) {
         channelUserService.deleteAllMembers(channelId);
 
-        fileService.saveChannelUsers();
-
         channelService.deleteById(channelId);
-
-        fileService.saveChannels();
 
         Message.success();
     }
@@ -281,7 +272,6 @@ public class ChannelsView {
 
         Message.success();
 
-        fileService.saveChannels();
     }
 
     private static void deleteAdmin(String channelId) {
@@ -301,7 +291,6 @@ public class ChannelsView {
 
             bySubscriberId.setAdmin(false);
 
-            fileService.saveChannelUsers();
         }
     }
 
@@ -319,7 +308,6 @@ public class ChannelsView {
 
             Message.success();
 
-            fileService.saveChannelUsers();
         }
     }
 
@@ -351,7 +339,6 @@ public class ChannelsView {
 
             System.out.println("Sent! ");
 
-            fileService.savePosts();
         }
     }
 
@@ -360,7 +347,6 @@ public class ChannelsView {
 
         Message.success();
 
-        fileService.saveChannelUsers();
     }
 
     private static void checkChannel(String channelId) {
@@ -387,7 +373,6 @@ public class ChannelsView {
                 System.out.println(post + " from : " + userService.get(post.getUserId()) + " views : " + post.getCountOfViews());
                 post.setCountOfViews(post.getCountOfViews() + 1);
 
-                fileService.savePosts();
             }
         }
         System.out.println("===================");

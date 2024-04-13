@@ -5,8 +5,6 @@ import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserSe
 import uz.pdp.backend.service.channel_service.channel_user_service.ChannelUserServiceImpl;
 import uz.pdp.backend.service.chat_service.ChatService;
 import uz.pdp.backend.service.chat_service.ChatServiceImpl;
-import uz.pdp.backend.service.file_service.FileService;
-import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.group_service.group_user_service.GroupUserService;
 import uz.pdp.backend.service.group_service.group_user_service.GroupUserServiceImpl;
 import uz.pdp.backend.service.user_service.UserService;
@@ -20,7 +18,6 @@ public class SettingsView {
     static GroupUserService groupUserService = GroupUserServiceImpl.getInstance();
     static ChannelUserService channelUserService = ChannelUserServiceImpl.getInstance();
     static ChatService chatService = ChatServiceImpl.getInstance();
-//    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void start() {
         while (true) {
@@ -54,15 +51,12 @@ public class SettingsView {
 
             if (Main.curUser.getPassword().equals(password)) {
                 userService.deleteByUserId(Main.curUser.getId());
-//                fileService.saveUsers();
 
                 chatService.deleteByUserId(Main.curUser.getId());
 
                 groupUserService.deleteByUserId(Main.curUser.getId());
-//                fileService.saveGroupUsers();
 
                 channelUserService.deleteByUserId(Main.curUser.getId());
-//                fileService.saveChannelUsers();
 
                 System.out.println("Bye Bye :(");
 
@@ -81,7 +75,6 @@ public class SettingsView {
 
         curUser.setPassword(password);
 
-//        fileService.saveUsers();
     }
 
     private static void changeNickname() {
@@ -93,7 +86,6 @@ public class SettingsView {
 
         curUser.setNickname(nickname);
 
-//        fileService.saveUsers();
     }
 
     private static void changeName() {
@@ -104,8 +96,6 @@ public class SettingsView {
         }
 
         curUser.setName(name);
-
-//        fileService.saveUsers();
     }
 
     private static void displaySettingsMenu() {

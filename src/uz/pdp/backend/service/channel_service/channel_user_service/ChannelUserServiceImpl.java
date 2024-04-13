@@ -2,8 +2,6 @@ package uz.pdp.backend.service.channel_service.channel_user_service;
 
 import uz.pdp.backend.model.channel.ChannelUsers;
 import uz.pdp.backend.model.user.Users;
-import uz.pdp.backend.service.file_service.FileService;
-import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.user_service.UserService;
 import uz.pdp.backend.service.user_service.UserServiceImpl;
 
@@ -14,13 +12,11 @@ public class ChannelUserServiceImpl implements ChannelUserService {
     UserService userService = UserServiceImpl.getInstance();
     private static ChannelUserService channelUserService;
 
-    static FileService fileService = FileServiceImpl.getInstance();
 
     private List<ChannelUsers> channelUsers;
 
     public ChannelUserServiceImpl() {
         this.channelUsers = new ArrayList<>();
-//        fileService.loadChannelUsers();
     }
 
     public static ChannelUserService getInstance() {

@@ -2,8 +2,6 @@ package uz.pdp.backend.service.group_service.group_user_service;
 
 import uz.pdp.backend.model.group.GroupUsers;
 import uz.pdp.backend.model.user.Users;
-import uz.pdp.backend.service.file_service.FileService;
-import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.user_service.UserService;
 import uz.pdp.backend.service.user_service.UserServiceImpl;
 
@@ -15,13 +13,11 @@ public class GroupUserServiceImpl implements GroupUserService {
 
     private static GroupUserService groupUserService;
     static UserService userService = UserServiceImpl.getInstance();
-    static FileService fileService = FileServiceImpl.getInstance();
 
     private List<GroupUsers> groupUsers;
 
     public GroupUserServiceImpl() {
         this.groupUsers = new ArrayList<>();
-//        fileService.loadGroupUsers();
     }
 
     public static GroupUserService getInstance() {

@@ -2,8 +2,6 @@ package uz.pdp.ui.views;
 
 import uz.pdp.backend.dto.LoginDTO;
 import uz.pdp.backend.model.user.Users;
-import uz.pdp.backend.service.file_service.FileService;
-import uz.pdp.backend.service.file_service.FileServiceImpl;
 import uz.pdp.backend.service.user_service.UserService;
 import uz.pdp.backend.service.user_service.UserServiceImpl;
 import uz.pdp.ui.Main;
@@ -17,7 +15,6 @@ public class LoginView {
 
     static UserService userService = UserServiceImpl.getInstance();
 
-//    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void registerUser() {
         System.out.println("Registration : ");
@@ -45,7 +42,6 @@ public class LoginView {
         Message.success();
         System.out.println("Welcome! " + Main.curUser.getName());
 
-//        fileService.saveUsers();
     }
 
     public static void loginUser() {
@@ -84,6 +80,5 @@ public class LoginView {
         Main.curUser.setLastActivity(LocalTime.now());
         Main.curUser = null;
 
-//        fileService.saveUsers();
     }
 }

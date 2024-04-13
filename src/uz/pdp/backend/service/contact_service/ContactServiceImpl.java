@@ -1,8 +1,6 @@
 package uz.pdp.backend.service.contact_service;
 
 import uz.pdp.backend.model.contact.Contacts;
-import uz.pdp.backend.service.file_service.FileService;
-import uz.pdp.backend.service.file_service.FileServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +9,10 @@ public class ContactServiceImpl implements ContactService {
 
     private static ContactService contactService;
 
-    static FileService fileService = FileServiceImpl.getInstance();
     private List<Contacts> contacts;
 
     public ContactServiceImpl() {
         this.contacts = new ArrayList<>();
-//        fileService.loadContacts();
     }
 
     public static ContactService getInstance() {
