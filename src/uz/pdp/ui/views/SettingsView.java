@@ -17,7 +17,7 @@ public class SettingsView {
     static UserService userService = UserServiceImpl.getInstance();
     static GroupUserService groupUserService = GroupUserServiceImpl.getInstance();
     static ChannelUserService channelUserService = ChannelUserServiceImpl.getInstance();
-    static FileService fileService = FileServiceImpl.getInstance();
+//    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void start() {
         while (true) {
@@ -51,13 +51,13 @@ public class SettingsView {
 
             if (Main.curUser.getPassword().equals(password)) {
                 userService.deleteByUserId(Main.curUser.getId());
-                fileService.saveUsers();
+//                fileService.saveUsers();
 
                 groupUserService.deleteByUserId(Main.curUser.getId());
-                fileService.saveGroupUsers();
+//                fileService.saveGroupUsers();
 
                 channelUserService.deleteByUserId(Main.curUser.getId());
-                fileService.saveChannelUsers();
+//                fileService.saveChannelUsers();
 
                 System.out.println("Bye Bye :(");
 
@@ -76,7 +76,7 @@ public class SettingsView {
 
         curUser.setPassword(password);
 
-        fileService.saveUsers();
+//        fileService.saveUsers();
     }
 
     private static void changeNickname() {
@@ -88,7 +88,7 @@ public class SettingsView {
 
         curUser.setNickname(nickname);
 
-        fileService.saveUsers();
+//        fileService.saveUsers();
     }
 
     private static void changeName() {
@@ -100,7 +100,7 @@ public class SettingsView {
 
         curUser.setName(name);
 
-        fileService.saveUsers();
+//        fileService.saveUsers();
     }
 
     private static void displaySettingsMenu() {

@@ -32,7 +32,7 @@ public class ChannelsView {
 
     static PostService postService = PostServiceImpl.getInstance();
 
-    static FileService fileService = FileServiceImpl.getInstance();
+//    static FileService fileService = FileServiceImpl.getInstance();
 
 
     public static void start() {
@@ -86,7 +86,7 @@ public class ChannelsView {
             channelService.add(channel);
             Message.success();
 
-            fileService.saveChannels();
+//            fileService.saveChannels();
         }
     }
 
@@ -152,11 +152,11 @@ public class ChannelsView {
     private static void deleteChannel(String channelId) {
         channelUserService.deleteAllMembers(channelId);
 
-        fileService.saveChannelUsers();
+//        fileService.saveChannelUsers();
 
         channelService.deleteById(channelId);
 
-        fileService.saveChannels();
+//        fileService.saveChannels();
 
         Message.success();
     }
@@ -174,7 +174,7 @@ public class ChannelsView {
 
         Message.success();
 
-        fileService.saveChannels();
+//        fileService.saveChannels();
     }
 
     private static void deleteAdmin(String channelId) {
@@ -189,7 +189,7 @@ public class ChannelsView {
 
             bySubscriberId.setAdmin(false);
 
-            fileService.saveChannelUsers();
+//            fileService.saveChannelUsers();
         }
     }
 
@@ -207,7 +207,7 @@ public class ChannelsView {
 
             Message.success();
 
-            fileService.saveChannelUsers();
+//            fileService.saveChannelUsers();
         }
     }
 
@@ -239,7 +239,7 @@ public class ChannelsView {
 
             System.out.println("Sent! ");
 
-            fileService.savePosts();
+//            fileService.savePosts();
         }
     }
 
@@ -248,7 +248,7 @@ public class ChannelsView {
 
         Message.success();
 
-        fileService.saveChannelUsers();
+//        fileService.saveChannelUsers();
     }
 
     private static void checkChannel(String channelId) {
@@ -275,7 +275,7 @@ public class ChannelsView {
                 System.out.println(post + " from : " + userService.get(post.getUserId()) + " views : " + post.getCountOfViews());
                 post.setCountOfViews(post.getCountOfViews() + 1);
 
-                fileService.savePosts();
+//                fileService.savePosts();
             }
         }
         System.out.println("===================");

@@ -17,7 +17,7 @@ public class LoginView {
 
     static UserService userService = UserServiceImpl.getInstance();
 
-    static FileService fileService = FileServiceImpl.getInstance();
+//    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void registerUser() {
         System.out.println("Registration : ");
@@ -45,7 +45,7 @@ public class LoginView {
         Message.success();
         System.out.println("Welcome! " + Main.curUser.getName());
 
-        fileService.saveUsers();
+//        fileService.saveUsers();
     }
 
     public static void loginUser() {
@@ -84,6 +84,6 @@ public class LoginView {
         Main.curUser.setLastActivity(LocalTime.now());
         Main.curUser = null;
 
-        fileService.saveUsers();
+//        fileService.saveUsers();
     }
 }

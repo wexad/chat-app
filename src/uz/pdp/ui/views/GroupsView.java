@@ -37,7 +37,7 @@ public class GroupsView {
 
     static ContactService contactService = ContactServiceImpl.getInstance();
 
-    static FileService fileService = FileServiceImpl.getInstance();
+//    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void start() {
         Integer choice;
@@ -82,7 +82,7 @@ public class GroupsView {
 
                 groupsMenu(groupId);
 
-                fileService.saveGroupUsers();
+//                fileService.saveGroupUsers();
 
             }
         } else {
@@ -113,7 +113,7 @@ public class GroupsView {
             groupService.add(new Groups(name, type));
             Message.success();
 
-            fileService.saveGroups();
+//            fileService.saveGroups();
         }
     }
 
@@ -224,7 +224,7 @@ public class GroupsView {
             groupUserService.deleteAdminStatus(admins.get(index).getId(), groupId);
             Message.success();
 
-            fileService.saveGroupUsers();
+//            fileService.saveGroupUsers();
         }
     }
 
@@ -239,17 +239,17 @@ public class GroupsView {
 
         Message.success();
 
-        fileService.saveGroupUsers();
+//        fileService.saveGroupUsers();
     }
 
     private static void deleteGroup(String groupId) {
         groupService.deleteById(groupId);
 
-        fileService.saveGroups();
+//        fileService.saveGroups();
 
         groupUserService.deleteAllMembers(groupId);
 
-        fileService.saveGroupUsers();
+//        fileService.saveGroupUsers();
     }
 
     private static void removeMember(String groupId) {
@@ -268,7 +268,7 @@ public class GroupsView {
                 groupUserService.deleteByMemberId(user.getId(), groupId);
                 Message.success();
 
-                fileService.saveGroupUsers();
+//                fileService.saveGroupUsers();
             }
         }
     }
@@ -280,7 +280,7 @@ public class GroupsView {
 
         Message.success();
 
-        fileService.saveGroups();
+//        fileService.saveGroups();
     }
 
     private static void makeAdmin(String groupId) {
@@ -300,7 +300,7 @@ public class GroupsView {
 
             groupUsers.setAdmin(true);
 
-            fileService.saveGroupUsers();
+//            fileService.saveGroupUsers();
         }
     }
 
@@ -330,7 +330,7 @@ public class GroupsView {
 
             System.out.println("Sent!");
 
-            fileService.saveMessages();
+//            fileService.saveMessages();
         }
     }
 
@@ -349,7 +349,7 @@ public class GroupsView {
             Contacts contact = contacts.get(index);
             groupUserService.add(new GroupUsers(contact.getContactId(), groupId, false));
 
-            fileService.saveGroupUsers();
+//            fileService.saveGroupUsers();
         }
     }
 
@@ -396,7 +396,7 @@ public class GroupsView {
                 System.out.println(messages);
                 messages.setRead(true);
 
-                fileService.saveMessages();
+//                fileService.saveMessages();
             }
         }
         System.out.println("===========================");

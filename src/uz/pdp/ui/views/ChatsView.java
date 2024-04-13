@@ -28,7 +28,7 @@ public class ChatsView {
     static UserService userService = UserServiceImpl.getInstance();
     static MessageService messageService = MessageServiceImpl.getInstance();
     static ContactService contactService = ContactServiceImpl.getInstance();
-    static FileService fileService = FileServiceImpl.getInstance();
+//    static FileService fileService = FileServiceImpl.getInstance();
 
     public static void start() {
         Integer choice;
@@ -63,7 +63,7 @@ public class ChatsView {
         if (index < usersByWord.size()) {
             if (!chatService.isExist(usersByWord.get(index).getId())) {
                 chatService.add(new Chats(Main.curUser.getId(), usersByWord.get(index).getId()));
-                fileService.saveChats();
+//                fileService.saveChats();
 
             }
             sendMessageToChat(chatService.getChatOfUser(Main.curUser.getId()));
@@ -125,7 +125,7 @@ public class ChatsView {
             Message.success();
             System.out.println("Sent!");
 
-            fileService.saveMessages();
+//            fileService.saveMessages();
         }
     }
 
@@ -143,7 +143,7 @@ public class ChatsView {
             } else {
                 System.out.println(messages);
                 messages.setRead(true);
-                fileService.saveMessages();
+//                fileService.saveMessages();
             }
         }
         System.out.println("===========================");

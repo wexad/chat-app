@@ -12,4 +12,5 @@ public interface BaseService<E extends BaseModel>{
     E get(String id);
 
     List<E> getList();
+
 }
