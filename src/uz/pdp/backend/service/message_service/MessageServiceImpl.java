@@ -78,7 +78,7 @@ public class MessageServiceImpl implements MessageService {
     public int countNotReadMessages(String fromId, String toId) {
         int count = 0;
         for (Messages message : messages) {
-            if (message.getToId().equals(toId) && message.getUserId().equals(fromId) && message.isRead()) {
+            if (message.getToId().equals(toId) && message.getUserId().equals(fromId) && !message.isRead()) {
                 count++;
             }
         }
