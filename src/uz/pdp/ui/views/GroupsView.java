@@ -125,11 +125,11 @@ public class GroupsView {
                 2. Public
                 """);
 
-        int type = Input.inputInt("Choose : ") - 1;
+        int type = Input.inputInt("Choose : ");
 
         Type[] types = Type.values();
 
-        if (type >= types.length) {
+        if (type > types.length) {
             return null;
         }
         return types[type - 1];
