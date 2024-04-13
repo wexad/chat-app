@@ -20,7 +20,7 @@ public class ChannelUserServiceImpl implements ChannelUserService {
 
     public ChannelUserServiceImpl() {
         this.channelUsers = new ArrayList<>();
-        fileService.loadChannelUsers();
+//        fileService.loadChannelUsers();
     }
 
     public static ChannelUserService getInstance() {
