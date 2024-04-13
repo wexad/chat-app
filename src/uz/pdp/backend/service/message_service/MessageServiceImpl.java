@@ -75,10 +75,10 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public int countNotReadMessages(String fromId, String toId) {
+    public int countNotReadMessages(String chatId, String MyId) {
         int count = 0;
         for (Messages message : messages) {
-            if (message.getToId().equals(toId) && message.getUserId().equals(fromId) && !message.isRead()) {
+            if (message.getToId().equals(MyId) && message.getUserId().equals(chatId) && (!message.isRead())) {
                 count++;
             }
         }
