@@ -2,11 +2,14 @@ package uz.pdp.backend.service.channel_service.channel_user_service;
 
 import uz.pdp.backend.model.channel.ChannelUsers;
 import uz.pdp.backend.model.user.Users;
+import uz.pdp.backend.service.user_service.UserService;
+import uz.pdp.backend.service.user_service.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChannelUserServiceImpl implements ChannelUserService {
+    UserService userService = UserServiceImpl.getInstance();
     private static ChannelUserService channelUserService;
 
     private List<ChannelUsers> channelUsers;
@@ -49,27 +52,53 @@ public class ChannelUserServiceImpl implements ChannelUserService {
     }
 
     @Override
-    public int countMembers() {
-        return 0;
+    public int countMembers(String channelId) {
+        int count = 0;
+        for (ChannelUsers channelUser : channelUsers) {
+            if (channelUser.getChannelId().equals(channelId)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override
-    public boolean isAdmin(String id, String channelId) {
+    public boolean isAdmin(String userId, String channelId) {
+        for (ChannelUsers channelUser : channelUsers) {
+            if (channelUser.getUserId().equals(userId) && channelUser.getChannelId().equals(channelId) &&  channelUser.isAdmin()) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public void deleteMember(String id, String channelId) {
-
+    public void deleteMember(String userId, String channelId) {
+        for (ChannelUsers channelUser : channelUsers) {
+            if (channelUser.getUserId().equals(userId) && channelUser.getChannelId().equals(channelId)) {
+                channelUsers.remove(channelUser);
+            }
+        }
     }
 
     @Override
     public List<Users> getSubscribers(String channelId) {
-        return null;
+        List<Users> usersList = new ArrayList<>();
+        for (ChannelUsers channelUser : channelUsers) {
+            if (channelUser.getChannelId().equals(channelId)) {
+                usersList.add(userService.get(channelUser.getUserId()));
+            }
+        }
+        return usersList;
     }
 
     @Override
-    public ChannelUsers getByMemberId(String id) {
+    public ChannelUsers getByMemberId(String userId, String channelId) {
+        for (ChannelUsers channelUser : channelUsers) {
+            if (channelUser.getChannelId().equals(channelId) && channelUser.getUserId().equals(userId)) {
+                return channelUser;
+            }
+        }
         return null;
     }
 
@@ -80,11 +109,19 @@ public class ChannelUserServiceImpl implements ChannelUserService {
 
     @Override
     public void deleteAllMembers(String channelId) {
-
+        for (ChannelUsers channelUser : channelUsers) {
+            if (channelUser.getChannelId().equals(channelId)) {
+                channelUsers.remove(channelUser);
+            }
+        }
     }
 
     @Override
-    public void deleteByUserId(String id) {
-
+    public void deleteByUserId(String userId) {
+        for (ChannelUsers channelUser : channelUsers) {
+            if (channelUser.getUserId().equals(userId)) {
+                channelUsers.remove(channelUser);
+            }
+        }
     }
 }

@@ -64,12 +64,24 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Messages> getMessagesGroupOrChannel(String Id) {
-        return null;
+    public List<Messages> getMessagesGroupOrChannel(String groupId) {
+        List<Messages> messagesList = new ArrayList<>();
+        for (Messages message : messages) {
+            if (message.getToId().equals(groupId)) {
+                messagesList.add(message);
+            }
+        }
+        return messagesList;
     }
 
     @Override
     public int countNotReadMessages(String fromId, String toId) {
-        return 0;
+        int count = 0;
+        for (Messages message : messages) {
+            if (message.getToId().equals(toId) && message.getUserId().equals(fromId) && message.isRead()) {
+                count++;
+            }
+        }
+        return count;
     }
 }

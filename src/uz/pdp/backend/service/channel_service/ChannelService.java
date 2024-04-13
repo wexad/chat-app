@@ -7,7 +7,7 @@ import uz.pdp.backend.service.base_service.BaseService;
 import java.util.List;
 
 public interface ChannelService extends BaseService<Channels> {
-    List<Channels> getChannelsOfUser(String id);
+    List<Channels> getChannelsOfUser(String userId);
 
     void deleteById(String channelId);
 

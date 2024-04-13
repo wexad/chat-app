@@ -18,7 +18,7 @@ public interface UserService extends BaseService<Users> {
 
     List<Users> getUsersByWord(String s, String currUserId);
 
-    void deleteByUserId(String id);
+    void deleteByUserId(String userId);
 }
 
 

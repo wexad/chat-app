@@ -173,7 +173,7 @@ public class ChannelsView {
         int index = Input.inputInt("Choose (0 - cancel) : ") - 1;
 
         if (index != -1 && index < admins.size()) {
-            ChannelUsers bySubscriberId = channelUserService.getByMemberId(admins.get(index).getId());
+            ChannelUsers bySubscriberId = channelUserService.getByMemberId(admins.get(index).getId(), channelId);
 
             bySubscriberId.setAdmin(false);
         }
@@ -187,7 +187,7 @@ public class ChannelsView {
         int index = Input.inputInt("Choose (0 - cancel) : ") - 1;
 
         if (index != -1 && index < subscribers.size()) {
-            ChannelUsers bySubscriberId = channelUserService.getByMemberId(subscribers.get(index).getId());
+            ChannelUsers bySubscriberId = channelUserService.getByMemberId(subscribers.get(index).getId(), channelId);
 
             bySubscriberId.setAdmin(true);
         }
@@ -291,7 +291,7 @@ public class ChannelsView {
         System.out.println("Channels : ");
         int i = 1;
         for (Channels channel : channelsOfUser) {
-            System.out.println(i++ + ". " + channel + " | members : " + channelUserService.countMembers());
+            System.out.println(i++ + ". " + channel + " | members : " + channelUserService.countMembers(channel.getId()));
         }
         System.out.println("=====================");
     }

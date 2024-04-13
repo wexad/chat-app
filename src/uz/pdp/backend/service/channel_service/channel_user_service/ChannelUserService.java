@@ -7,19 +7,19 @@ import uz.pdp.backend.service.base_service.BaseService;
 import java.util.List;
 
 public interface ChannelUserService extends BaseService<ChannelUsers> {
-    int countMembers();
+    int countMembers(String channelId);
 
-    boolean isAdmin(String id, String channelId);
+    boolean isAdmin(String userId, String channelId);
 
-    void deleteMember(String id, String channelId);
+    void deleteMember(String userId, String channelId);
 
     List<Users> getSubscribers(String channelId);
 
-    ChannelUsers getByMemberId(String id);
+    ChannelUsers getByMemberId(String userId, String channelId);
 
     List<Users> getAdmins(String channelId);
 
     void deleteAllMembers(String channelId);
 
-    void deleteByUserId(String id);
+    void deleteByUserId(String userId);
 }

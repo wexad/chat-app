@@ -20,11 +20,11 @@ public interface GroupUserService extends BaseService<GroupUsers> {
 
     boolean isMember(String userId, String groupId);
 
-    List<Users> getAdminsWithinMe(String id);
+    List<Users> getAdminsWithinMe(String userId, String groupId);
 
-    void deleteAdminStatus(String id, String groupId);
+    void deleteAdminStatus(String userId, String groupId);
 
     int countAdmins(String groupId);
 
-    void deleteByUserId(String id);
+    void deleteByUserId(String userId);
 }

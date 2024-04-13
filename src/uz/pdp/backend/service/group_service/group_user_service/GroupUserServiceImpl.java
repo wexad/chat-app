@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupUserServiceImpl implements GroupUserService {
+    UserService userServiceImpl = UserServiceImpl.getInstance();
 
     private static GroupUserService groupUserService;
     static UserService userService = UserServiceImpl.getInstance();
@@ -123,22 +124,42 @@ public class GroupUserServiceImpl implements GroupUserService {
     }
 
     @Override
-    public List<Users> getAdminsWithinMe(String id) {
-        return null;
+    public List<Users> getAdminsWithinMe(String userId, String groupId) {
+        List<Users> usersList = new ArrayList<>();
+        for (GroupUsers groupUser : groupUsers) {
+            if (!groupUser.getUserId().equals(userId) && groupUser.getGroupId().equals(groupId) && groupUser.isAdmin()) {
+                usersList.add(userServiceImpl.get(groupUser.getUserId()));
+            }
+        }
+        return usersList;
     }
 
     @Override
-    public void deleteAdminStatus(String id, String groupId) {
-
+    public void deleteAdminStatus(String userId, String groupId) {
+        for (GroupUsers groupUser : groupUsers) {
+            if (groupUser.getUserId().equals(userId) && groupUser.getGroupId().equals(groupId)) {
+                groupUser.setAdmin(false);
+            }
+        }
     }
 
     @Override
     public int countAdmins(String groupId) {
-        return 0;
+        int count = 0;
+        for (GroupUsers groupUser : groupUsers) {
+            if (groupUser.getGroupId().equals(groupId) && groupUser.isAdmin()) {
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override
-    public void deleteByUserId(String id) {
-
+    public void deleteByUserId(String userId) {
+        for (GroupUsers groupUser : groupUsers) {
+            if (groupUser.getUserId().equals(userId)) {
+                groupUsers.remove(groupUser);
+            }
+        }
     }
 }

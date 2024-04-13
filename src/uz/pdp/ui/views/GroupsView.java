@@ -199,7 +199,7 @@ public class GroupsView {
     }
 
     private static void deleteAdmin(String groupId) {
-        List<Users> admins = groupUserService.getAdminsWithinMe(Main.curUser.getId());
+        List<Users> admins = groupUserService.getAdminsWithinMe(Main.curUser.getId(), groupId);
 
         if (admins.isEmpty()) {
             Message.failure();

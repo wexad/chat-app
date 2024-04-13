@@ -49,6 +49,12 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Posts> getPosts(String channelId) {
-        return null;
+        List<Posts> postsList = new ArrayList<>();
+        for (Posts post : posts) {
+            if (post.getChannelId().equals(channelId)) {
+                postsList.add(post);
+            }
+        }
+        return postsList;
     }
 }
