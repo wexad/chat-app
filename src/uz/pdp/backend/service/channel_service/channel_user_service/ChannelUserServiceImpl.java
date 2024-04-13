@@ -123,10 +123,6 @@ public class ChannelUserServiceImpl implements ChannelUserService {
 
     @Override
     public void deleteByUserId(String userId) {
-        for (ChannelUsers channelUser : channelUsers) {
-            if (channelUser.getUserId().equals(userId)) {
-                channelUsers.remove(channelUser);
-            }
-        }
+        channelUsers.removeIf(channelUsers1 -> channelUsers1.getUserId().equals(userId));
     }
 }

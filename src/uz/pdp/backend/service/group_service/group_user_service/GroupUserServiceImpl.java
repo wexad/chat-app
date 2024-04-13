@@ -156,10 +156,6 @@ public class GroupUserServiceImpl implements GroupUserService {
 
     @Override
     public void deleteByUserId(String userId) {
-        for (GroupUsers groupUser : groupUsers) {
-            if (groupUser.getUserId().equals(userId)) {
-                groupUsers.remove(groupUser);
-            }
-        }
+        groupUsers.removeIf(groupUsers1 -> groupUsers1.getUserId().equals(userId));
     }
 }

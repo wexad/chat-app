@@ -113,10 +113,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteByUserId(String userId) {
-        for (Users user : users) {
-            if (user.getId().equals(userId)) {
-                users.remove(user);
-            }
-        }
+        users.removeIf(users1 -> users1.getId().equals(userId));
     }
 }
