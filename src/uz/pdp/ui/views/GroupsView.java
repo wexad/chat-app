@@ -208,7 +208,7 @@ public class GroupsView {
     }
 
     private static void deleteAdmin(String groupId) {
-        List<Users> admins = groupUserService.getAdminsWithinMe(Main.curUser.getId(), groupId);
+        List<Users> admins = groupUserService.getAdminsWithoutMe(Main.curUser.getId(), groupId);
 
         if (admins.isEmpty()) {
             Message.failure();
@@ -347,6 +347,7 @@ public class GroupsView {
 
         if (groupUserService.isMember(contacts.get(index).getContactId(), groupId)) {
             System.out.println("He is already member of this group! ");
+            return;
         }
 
         Contacts contact = contacts.get(index);

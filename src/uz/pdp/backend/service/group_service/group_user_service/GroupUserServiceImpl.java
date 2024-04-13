@@ -106,9 +106,9 @@ public class GroupUserServiceImpl implements GroupUserService {
     }
 
     @Override
-    public boolean isMember(String userId, String groupId) {
+    public boolean isMember(String contactId, String groupId) {
         for (GroupUsers groupUser : groupUsers) {
-            if (groupUser.getGroupId().equals(groupId) && groupUser.getUserId().equals(userId)) {
+            if (groupUser.getGroupId().equals(groupId) && groupUser.getUserId().equals(contactId)) {
                 return true;
             }
         }
@@ -116,10 +116,10 @@ public class GroupUserServiceImpl implements GroupUserService {
     }
 
     @Override
-    public List<Users> getAdminsWithinMe(String userId, String groupId) {
+    public List<Users> getAdminsWithoutMe(String userId, String groupId) {
         List<Users> usersList = new ArrayList<>();
         for (GroupUsers groupUser : groupUsers) {
-            if (!groupUser.getUserId().equals(userId) && groupUser.getGroupId().equals(groupId) && groupUser.isAdmin()) {
+            if ((!groupUser.getUserId().equals(userId)) && groupUser.getGroupId().equals(groupId) && groupUser.isAdmin()) {
                 usersList.add(userServiceImpl.get(groupUser.getUserId()));
             }
         }
