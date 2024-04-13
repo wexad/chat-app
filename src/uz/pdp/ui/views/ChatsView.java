@@ -106,9 +106,19 @@ public class ChatsView {
     private static void sendMessageToChat(Chats chat) {
         while (true) {
             if (chat.getFirstUserId().equals(Main.curUser.getId())) {
-                System.out.println("\t".repeat(3) + userService.get(chat.getSecondUserId()));
+                Contacts contact = contactService.getContact(Main.curUser.getId(), chat.getSecondUserId());
+                if (contact != null) {
+                    System.out.println("\t".repeat(3) + contact.getName());
+                } else {
+                    System.out.println("\t".repeat(3) + userService.get(chat.getSecondUserId()));
+                }
             } else {
-                System.out.println("\t".repeat(3) + userService.get(chat.getFirstUserId()));
+                Contacts contact = contactService.getContact(Main.curUser.getId(), chat.getFirstUserId());
+                if (contact != null) {
+                    System.out.println("\t".repeat(3) + contact.getName());
+                } else {
+                    System.out.println("\t".repeat(3) + userService.get(chat.getFirstUserId()));
+                }
             }
             showChatHistory(chat);
 
