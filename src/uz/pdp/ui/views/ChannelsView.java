@@ -84,6 +84,8 @@ public class ChannelsView {
 
             Channels channel = new Channels(name, description, type);
             channelService.add(channel);
+
+            channelUserService.add(new ChannelUsers(Main.curUser.getId(), channel.getId(), true));
             Message.success();
 
 //            fileService.saveChannels();
@@ -100,7 +102,7 @@ public class ChannelsView {
 
         Type[] types = Type.values();
 
-        if (type >= types.length) {
+        if (type > types.length) {
             return null;
         }
         return types[type - 1];
@@ -108,7 +110,13 @@ public class ChannelsView {
 
     private static void channelMenu(List<Channels> channels) {
         while (true) {
+            if (channels.isEmpty()) {
+                Message.noData();
+                return;
+            }
+
             String channelId = chooseChannel(channels);
+
 
             if (channelId == null) {
                 return;

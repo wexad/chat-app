@@ -1,5 +1,6 @@
 package uz.pdp.backend.service.channel_service;
 
+import uz.pdp.backend.enums.Type;
 import uz.pdp.backend.model.channel.ChannelUsers;
 import uz.pdp.backend.model.channel.Channels;
 import uz.pdp.backend.model.user.Users;
@@ -77,7 +78,7 @@ public class ChannelServiceImpl implements ChannelService {
     public List<Channels> getChannelsByWord(String search) {
         List<Channels> channelsList = new ArrayList<>();
         for (Channels channel : channels) {
-            if (channel.getName().contains(search)) {
+            if (channel.getName().contains(search) && channel.getType().equals(Type.PUBLIC)) {
                 channelsList.add(channel);
             }
         }
