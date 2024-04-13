@@ -66,11 +66,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public void deleteById(String groupId) {
-        for (Groups group : groups) {
-            if (group.getId().equals(groupId)) {
-                groups.remove(group);
-            }
-        }
+        groups.removeIf(group -> group.getId().equals(groupId));
     }
 
     @Override
