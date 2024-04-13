@@ -18,6 +18,14 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl() {
         this.users = new ArrayList<>();
         users.add(new Users("a","a","a","a",LocalTime.now()));
+        users.add(new Users("b","b","b","b",LocalTime.now()));
+        users.add(new Users("c","c","c","c",LocalTime.now()));
+        users.add(new Users("d","d","d","d",LocalTime.now()));
+
+        users.add(new Users("a1","a1","a1","a1",LocalTime.now()));
+        users.add(new Users("b1","b1","b1","b1",LocalTime.now()));
+        users.add(new Users("c1","c1","c1","c1",LocalTime.now()));
+        users.add(new Users("d1","d1","d1","d1",LocalTime.now()));
     }
 
     public static UserService getInstance() {

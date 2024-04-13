@@ -109,8 +109,10 @@ public class GroupsView {
                 type = chooseType();
 
             }
+            Groups groups = new Groups(name, type);
+            groupService.add(groups);
 
-            groupService.add(new Groups(name, type));
+            groupUserService.add(new GroupUsers(Main.curUser.getId(), groups.getId(), true));
             Message.success();
 
 //            fileService.saveGroups();
