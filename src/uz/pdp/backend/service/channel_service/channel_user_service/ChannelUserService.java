@@ -13,11 +13,11 @@ public interface ChannelUserService extends BaseService<ChannelUsers> {
 
     void deleteMember(String userId, String channelId);
 
-    List<Users> getSubscribers(String channelId);
+    List<Users> getSubscribersWithoutAdmins(String channelId);
 
     ChannelUsers getByMemberId(String userId, String channelId);
 
-    List<Users> getAdmins(String channelId);
+    List<Users> getAdminsWithoutMe(String channelId, String userId);
 
     void deleteAllMembers(String channelId);
 

@@ -285,9 +285,9 @@ public class ChannelsView {
     }
 
     private static void deleteAdmin(String channelId) {
-        List<Users> admins = channelUserService.getAdmins(channelId);
+        List<Users> admins = channelUserService.getAdminsWithoutMe(channelId, Main.curUser.getId());
 
-        if (admins.isEmpty()) {
+        if (admins.isEmpty() || admins.size() == 1) {
             Message.noData();
             System.out.println("There is only 1 admin is you! ");
         }
@@ -306,7 +306,7 @@ public class ChannelsView {
     }
 
     private static void makeAdmin(String channelId) {
-        List<Users> subscribers = channelUserService.getSubscribers(channelId);
+        List<Users> subscribers = channelUserService.getSubscribersWithoutAdmins(channelId);
 
         showUsers(subscribers);
 

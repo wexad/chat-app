@@ -87,10 +87,10 @@ public class ChannelUserServiceImpl implements ChannelUserService {
     }
 
     @Override
-    public List<Users> getSubscribers(String channelId) {
+    public List<Users> getSubscribersWithoutAdmins(String channelId) {
         List<Users> usersList = new ArrayList<>();
         for (ChannelUsers channelUser : channelUsers) {
-            if (channelUser.getChannelId().equals(channelId)) {
+            if (channelUser.getChannelId().equals(channelId) && !channelUser.isAdmin()) {
                 usersList.add(userService.get(channelUser.getUserId()));
             }
         }
@@ -108,8 +108,14 @@ public class ChannelUserServiceImpl implements ChannelUserService {
     }
 
     @Override
-    public List<Users> getAdmins(String channelId) {
-        return null;
+    public List<Users> getAdminsWithoutMe(String channelId, String userId) {
+        List<Users> usersList = new ArrayList<>();
+        for (ChannelUsers channelUser : channelUsers) {
+            if (channelUser.getChannelId().equals(channelId) && !channelUser.getUserId().equals(userId)) {
+                usersList.add(userService.get(channelUser.getUserId()));
+            }
+        }
+        return usersList;
     }
 
     @Override
